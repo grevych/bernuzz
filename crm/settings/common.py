@@ -4,7 +4,7 @@
 # OVERWRITE BY DEV|TEST
 
 
-from .private import *
+from private import *
 
 
 DEBUG = False

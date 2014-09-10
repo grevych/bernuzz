@@ -7,7 +7,7 @@ from flask import render_template
 from flask_security import LoginForm
 from flask_security import  current_user, login_required, login_user
 
-from .. import core
+from crm import core
 #from . import assets
 
 app = None

@@ -11,7 +11,7 @@ from werkzeug.exceptions import NotFound
 from werkzeug.serving import run_simple
 from werkzeug.wsgi import DispatcherMiddleware
 
-from .apps import website, api
+from apps import website, api
 
 
 class SubdomainDispatcher(object):

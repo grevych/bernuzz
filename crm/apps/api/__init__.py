@@ -11,8 +11,8 @@ from functools import wraps
 from flask import jsonify
 from flask_security import login_required
 
-from .. import core
-from ..helpers import JSONEncoder
+from crm import core
+from crm import helpers
 
 
 def create_app(settings_override=None, register_security_blueprint=False):
@@ -25,7 +25,7 @@ def create_app(settings_override=None, register_security_blueprint=False):
         register_security_blueprint=register_security_blueprint)
 
     # Set the default JSON encoder
-    app.json_encoder = JSONEncoder
+    app.json_encoder = helpers.JSONEncoder
 
     # Register custom error handlers
     #app.errorhandler(OverholtError)(on_overholt_error)
@@ -40,7 +40,7 @@ def route(bp, *args, **kwargs):
 
     def decorator(f):
         @bp.route(*args, **kwargs)
-        @login_required
+        #@login_required
         @wraps(f)
         def wrapper(*args, **kwargs):
             sc = 200

@@ -1,6 +1,6 @@
 # -*- encoding:utf-8 -*-
 
-from ..core import db
+from crm.core import db
 
 
 class Service(object):

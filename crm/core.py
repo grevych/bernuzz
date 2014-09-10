@@ -10,8 +10,8 @@ from mongoengine import connect
 from flask_mongoengine import MongoEngine
 from flask_debugtoolbar import DebugToolbarExtension
 
-from .helpers import register_blueprints
-from .middlewares import HTTPMethodOverrideMiddleware
+from helpers import register_blueprints
+from middlewares import HTTPMethodOverrideMiddleware
 
 
 #db = SQLAlchemy()
@@ -40,7 +40,7 @@ def create_app(
     """
 
     app = Flask(package_name, instance_relative_config=True)
-    app.config.from_object('settings.development')
+    app.config.from_object('crm.settings.development')
     app.config.from_pyfile('settings.cfg', silent=True)
     app.config.from_object(settings_override)
     #app.config.from_envvar('FLASKR_SETTINGS', silent=True)
