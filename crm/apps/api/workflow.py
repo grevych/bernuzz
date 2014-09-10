@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    crm.api.products
+    crm.api.workflow
     ----------------
 
-    Process endpoints
+    Workflow endpoints
 """
 
 from flask import Blueprint, request
@@ -12,94 +12,115 @@ from crm.services import process, stage, task
 from . import route
 
 
-bp = Blueprint('workflow', __name__)
+bp = Blueprint('workflow', __name__, url_prefix='/processes')
 
 
-@route(bp, '/processes')
-def list_processes():
-    """Returns a list of process instances."""
+#
+#   CRUD PROCESOS
+#   -------------
+#
+@route(bp, '/')
+def processes():
+    """Regresa una lista con todos los procesos de una empresa"""
     #return products.all()
-    return {'prueba': 'all'}
+    return {'processes': 'all'}
 
 
-@route(bp, '/process', methods=['POST'])
-def create_process():
-    """Creates a new process. Returns the new process instance."""
+@route(bp, '/show/<process_id>')
+def process_detail(process_id):
+    """Regresa una instancia de proceso de una empresa"""
+    # return products.get_or_404(product_id)
+    return {'processes': 'detail'}
+
+
+@route(bp, '/update/<process_id>', methods=['POST'])
+def process_update(process_id):
+    """Actualiza una instancia de proceso de una empresa"""
     # form = NewProductForm()
     # if form.validate_on_submit():
     #     return products.create(**request.json)
     # raise OverholtFormError(form.errors)
-    pass
+    return {'processes': 'update'}
 
 
-@route(bp, '/process/<process_id>')
-def detail_process(product_id):
-    """Returns a process instance."""
-    # return products.get_or_404(product_id)
-    pass
-
-
-@route(bp, '/process/<product_id>', methods=['PUT'])
-def update_process(product_id):
-    """Updates a process. Returns the updated process instance."""
-    # form = UpdateProductForm()
+@route(bp, '/create', methods=['POST'])
+def process_create():
+    """Crea una instancia de proceso de una empresa"""
+    # form = NewProductForm()
     # if form.validate_on_submit():
-    #     return products.update(products.get_or_404(product_id), **request.json)
-    # raise(OverholtFormError(form.errors))
-    pass
+    #     return products.create(**request.json)
+    # raise OverholtFormError(form.errors)
+    return {'processes': 'create'}
 
 
-@route(bp, '/process/<product_id>', methods=['DELETE'])
-def delete_process(product_id):
-    """Deletes a process. Returns a 204 response."""
-    # products.delete(products.get_or_404(product_id))
-    # return None, 204
-    pass
+@route(bp, '/destroy/<process_id>')
+def process_destroy(process_id):
+    """Elimina una instancia de proceso de una empresa"""
+    # return products.get_or_404(product_id)
+    return {'processes': 'destroy'}
 
 
-@route(bp, '/stage', methods=['POST'])
-def create_stage():
-    """Creates a new stage. Returns the new stage instance."""
-    pass
+#
+#   CRUD STAGE
+#   ----------
+#
+@route(bp, '/stage/show/<stage_id>')
+def stage_detail(stage_id):
+    """Regresa una instancia de stage de proceso
+    de una empresa"""
+    # return products.get_or_404(product_id)
+    return {'stage': 'detail'}
 
 
-@route(bp, '/stage/<stage_id>')
-def detail_stage(product_id):
-    """Returns a stage instance."""
-    pass
+@route(bp, '/stage/update/<stage_id>', methods=['POST'])
+def stage_update(stage_id):
+    """Actualiza una instancia de stage de proceso
+    de una empresa"""
+    return {'stage': 'update'}
 
 
-@route(bp, '/stage/<stage_id>', methods=['PUT'])
-def update_stage(product_id):
-    """Updates a stage. Returns the updated stage instance."""
-    pass
+@route(bp, '/stage/create', methods=['POST'])
+def stage_create():
+    """Crea una instancia de stage de proceso de una empresa """
+    return {'stage': 'create'}
 
 
-@route(bp, '/stage/<stage_id>', methods=['DELETE'])
-def delete_stage(product_id):
-    """Deletes a stage. Returns a 204 response."""
-    pass
+@route(bp, '/stage/destroy/<stage_id>')
+def stage_destroy(stage_id):
+    """Elimina una instancia de stage de proceso
+    de una empresa"""
+    # return products.get_or_404(product_id)
+    return {'stage': 'destroy'}
 
 
-@route(bp, '/task', methods=['POST'])
-def create_task():
-    """Creates a new task. Returns the new task instance."""
-    pass
+#
+#   CRUD TASK
+#   ---------
+#
+@route(bp, '/task/show/<task_id>')
+def task_detail(task_id):
+    """Regresa una instancia de stage de proceso
+    de una empresa"""
+    # return products.get_or_404(product_id)
+    return {'task': 'detail'}
 
 
-@route(bp, '/task/<task_id>')
-def detail_task(product_id):
-    """Returns a task instance."""
-    pass
+@route(bp, '/task/update/<task_id>', methods=['POST'])
+def task_update(task_id):
+    """Actualiza una instancia de stage de proceso
+    de una empresa"""
+    return {'task': 'update'}
 
 
-@route(bp, '/task/<task_id>', methods=['PUT'])
-def update_task(product_id):
-    """Updates a task. Returns the updated task instance."""
-    pass
+@route(bp, '/task/create', methods=['POST'])
+def task_create():
+    """Crea una instancia de stage de proceso de una empresa """
+    return {'task': 'create'}
 
 
-@route(bp, '/task/<task_id>', methods=['DELETE'])
-def delete_task(product_id):
-    """Deletes a task. Returns a 204 response."""
-    pass
+@route(bp, '/task/destroy/<task_id>')
+def task_destroy(task_id):
+    """Elimina una instancia de stage de proceso
+    de una empresa"""
+    # return products.get_or_404(product_id)
+    return {'task': 'destroy'}
