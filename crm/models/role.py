@@ -1,22 +1,31 @@
+# -*- encoding:utf-8 -*-
+
+from crm.core import db
+from .permission import Permission
 
 
-class Role(RoleMixin, db.Model):
-    __tablename__ = 'role'
+class Role(db.Document):
+    id = db.IntField(primary_key=True, required=True)
+    name = db.StringField()
+    permissions = db.ListField(db.ReferenceField(Permission))
 
-    id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(80), unique=True)
-    description = db.Column(db.String(255))
+    def get_id(self):
+        return self.id
 
-    def __eq__(self, other):
-        return (self.name == other or
-                self.name == getattr(other, 'name', None))
+    def set_id(self, id):
+        self.id = id
 
-    def __ne__(self, other):
-        return (self.name != other and
-                self.name != getattr(other, 'name', None))
+    def get_name(self):
+        return self.name
 
+    def set_name(self, name):
+        self.name = name
 
-roles_users = db.Table(
-    'roles_users',
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-    db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
+    def add_permission(self):
+        pass
+
+    def remove_permission(self):
+        pass
+
+    def has_permission(self):
+        pass

@@ -1,7 +1,7 @@
 # -*- encoding:utf-8 -*-
 
 from crm.core import db
-from stage import StageTemplate
+from .stage import StageTemplate
 
 
 class TaskTemplate(db.Document):

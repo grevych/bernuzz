@@ -1,8 +1,8 @@
 # -*- encoding:utf-8 -*-
 
 from crm.core import db
-from stage import StageTemplate
-from company import Company
+from .stage import StageTemplate
+from .company import Company
 
 
 class ProcessTemplate(db.Document):
