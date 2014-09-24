@@ -1,17 +1,15 @@
 # -*- encoding:utf-8 -*-
 
 from crm.core import db
-from .task import TaskTemplate
-from .process import ProcessTemplate
 
 
 class StageTemplate(db.Document):
-    __name__ = db.StringField(
+    __title__ = db.StringField(
         max_length=40,
         required=True)
-    __process__ = db.ReferenceField(ProcessTemplate)
-    __tasks__ = db.ListField(
-        db.ReferenceField(TaskTemplate))
+    __process_template__ = db.ReferenceField('ProcessTemplate')
+    __task_templates__ = db.ListField(
+        db.ReferenceField('TaskTemplate'))
 
     meta = {
         'allow_inheritance': True
@@ -27,5 +25,12 @@ class StageTemplate(db.Document):
         return self.__tasks__
 
 
-class Stage(db.Document, StageTemplate):
-    __template__ = db.ReferenceField(StageTemplate)
+class Stage(db.Document):
+    __title__ = db.StringField(
+        max_length=40,
+        required=True)
+    __process__ = db.ReferenceField('Process')
+    __tasks__ = db.ListField(
+        db.ReferenceField('Task'))
+    __template__ = db.ReferenceField('StageTemplate')
+    __manager__ = db.ReferenceField('User')

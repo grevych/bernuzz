@@ -6,6 +6,7 @@
     Workflow endpoints
 """
 
+from pprint import pprint
 from flask import Blueprint, request
 
 from crm.services import process, stage, task
@@ -15,32 +16,22 @@ from . import route
 bp = Blueprint('workflow', __name__, url_prefix='/processes')
 
 
-#
-#   CRUD PROCESOS
-#   -------------
-#
 @route(bp, '/')
 def processes():
     """Regresa una lista con todos los procesos de una empresa"""
-    #return products.all()
-    return {'processes': 'all'}
+    return process.get_all()
 
 
 @route(bp, '/show/<process_id>')
 def process_detail(process_id):
     """Regresa una instancia de proceso de una empresa"""
-    # return products.get_or_404(product_id)
-    return {'processes': 'detail'}
+    return process.get_or_404(process_id)
 
 
 @route(bp, '/update/<process_id>', methods=['POST'])
 def process_update(process_id):
     """Actualiza una instancia de proceso de una empresa"""
-    # form = NewProductForm()
-    # if form.validate_on_submit():
-    #     return products.create(**request.json)
-    # raise OverholtFormError(form.errors)
-    return {'processes': 'update'}
+    return process.update(process_id, request.form)
 
 
 @route(bp, '/create', methods=['POST'])
@@ -50,7 +41,8 @@ def process_create():
     # if form.validate_on_submit():
     #     return products.create(**request.json)
     # raise OverholtFormError(form.errors)
-    return {'processes': 'create'}
+    pprint(dir(request))
+    return {'processes': 'create', 'request': request.json}
 
 
 @route(bp, '/destroy/<process_id>')
