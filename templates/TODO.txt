@@ -1,0 +1,29 @@
+
+vista de proyectos en dashboard
+vista de equipos en dashboard
+
+
+vista de procesos (activos, etc) en dashboard
+vista de tasks actuales en pagina entera en dashboard
+vista de tasks actuales en aside derecha en dashboard
+vista preliminar de proyecto en aside derecha en dashboard
+vista preliminar de equipo en aside derecha en dashboard
+
+vista de busqueda
+vista de menu fuera de dashboard
+    - seleccion en vertical de equipo o proyecto (se muestran los mas recientes o activos, etc)
+    - si seleccionas equipos > equipo, te muestra el principal de equipo
+    - si seleccionas proyectos > proyecto, te muestra el principal de proyecto
+    - si seleccionas procesos > proyecto, te muestra los procesos de ese proyecto
+    - si seleccionas tasks > proyecto, te muestra los tasks de ese proyecto
+
+vista principal de proyecto
+vista principal de equipo
+
+vista de perfil
+vista de settings
+
+
+--------
+vista de creacion de procesos
+vista de tipos de procesos

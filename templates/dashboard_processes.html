@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<!--
+    DASHBOARD DE USUARIO
+
+
+-->
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700|Roboto+Condensed:400,700,300|Roboto:100,200,300,400|Lato:200,300,400,500,600' rel='stylesheet' type='text/css'>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">  
+        <style>
+
+html, body {
+    width:100%;
+    height:100%;
+}
+            
+* {
+    margin:0;
+    padding:0;
+}
+
+a {
+    text-decoration: none;
+    color:inherit;
+}
+
+
+.square:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.square {
+    margin:0 12px 0 0;
+    padding:4px;
+    position:relative; 
+    text-align:center; 
+    display:inline-block; 
+    width:10%; 
+    min-width:100px; 
+    border:1px solid #F2F2F2;
+    border-radius:2px; 
+    float:left;
+}
+
+
+
+.square {
+    margin:0 12px 0 0;
+    background:white;
+    padding:4px;
+    position:relative; 
+    text-align:center; 
+    display:inline-block; 
+    width:10%; 
+    min-width:100px; 
+    border:1px solid #F2F2F2; 
+    /*overflow:hidden;*/ 
+    border-radius:50%; 
+    float:left;
+    cursor:pointer;
+}
+
+.square > div {
+    border:1px solid #F2F2F2; 
+    border-radius:50%;
+}
+
+
+.search_input:focus {
+    
+    outline:none;
+    width:90% !important;
+}
+
+
+header > * {
+    vertical-align: middle;
+}
+
+
+.menu-item > div:hover {
+    background:#A322AE;
+}
+
+.menu-item > div {
+    cursor:pointer;
+}
+
+
+.process {
+    overflow: hidden;
+    margin-bottom:20px;
+}
+        </style>
+    </head>
+
+
+    <body>
+        <header style="padding:10px 0; height:auto; box-shadow:0 0 8px rgba(0, 0, 0, .1); z-index:200; background:#FFF; position:fixed; top:0; left:0px; right:0;">            
+            <div style="boxshadow:0 0 8px rgba(0, 0, 0, .1);   display:inline-block; ">
+                <div style="overflow:hidden;">
+                    <span style="display:inline-block; text-align:center; margin-left:10px; font-family:Roboto Condensed; padding:4px 0; font-weight:400; font-size:24px; width:34px; height:26px; border-radius:2px; background:#323232; float:left; line-height:24px; color:#FFF;">Bz</span>
+                    <div style="display:inline-block; float:left; margin-left:8px; border-radius:2px; overflow:hidden; width:34px; height:34px; "><img width="34px" src="profile.jpg"></div>
+                </div>
+            </div>
+            <div  style="display:inline-block; overflow:hidden;  vertical-align:middle; margin-left:6px;">
+                <i style="padding:4px 8px; font-size:14px; line-height:18px; position:relative; z-index:351;" class="fa fa-search"></i>
+                <input class="search_input" placeholder="Busca proyectos, equipos, creadores" type="text"  style=" width:234px; 
+                 padding:4px 12px 4px 32px; display:inline-block; position:relative;  background:transparent; line-height:24px;font-size: 14px;
+                font-weight: lighter;  border-radius:2px;
+                font-family: Roboto; border: 1px solid #CACACA; background:#FFF; margin-left:-33px; position:relative; z-index:350;">
+                </input>
+            </div>
+            <div style="float:right; display:inline-block; padding-right:80px; width:auto; line-height:26px;">
+                <span style="font-size:14px; color:#323232;  line-height:20px;"><i class="fa fa-plus"></i></span>
+                <span style="font-size:14px; color:#323232;  line-height:20px;"><i class="fa fa-sort-desc"></i></span>
+            </div>
+        </header>
+    
+        <aside style="position:fixed; background:#FFF; color:#E5E5E5; color:#FFF; left:0; width:52px; bottom:0; top:54px; z-index:300; border-right:1px solid #F2F2F2;"> <!-- background:rgba(158, 199, 231, 0.46); -->                
+            <nav style=" display:block; font-size:14px; font-weight:300; overflow:hidden; border-top:1 solid white;">
+                <ul style="border-top:1 solid #555; margin-top:-10px;">
+                    <li class="menu-item" style="display:block; position:relative;"> 
+                        <div style=" margin:10px; background:#434343; border-radius:2px; padding:4px;  text-align:center; width:26px;">
+                            <i style="line-height:26px;"  class="fa fa-mortar-board fa-fw"></i>
+                        </div>
+                    </li>
+                    <li class="menu-item" style="display:block; position:relative;"> 
+                        <div style=" margin:10px; background:#434343; border-radius:2px; padding:4px;  text-align:center; width:26px;">
+                            <i style="line-height:26px;"  class="fa fa-group fa-fw"></i>
+                        </div>
+                    </li>
+                    <li class="menu-item" style="display:block; position:relative;"> 
+                        <div style=" margin:10px; background:#434343; border-radius:2px; padding:4px;  text-align:center; width:26px;">
+                            <i style="line-height:26px;"  class="fa fa-code-fork fa-fw"></i>
+                        </div>
+                    </li>
+                    <li class="menu-item" style="display:block; position:relative;"> 
+                        <div style=" margin:10px; background:#434343; border-radius:2px; padding:4px;  text-align:center; width:26px;">
+                            <i style="line-height:26px;"  class="fa fa-tasks fa-fw"></i>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+                
+            <div style="position:absolute; bottom:0; left:0; right:0; background:#323232;">
+                <span style="display:block; font-size:12px; color:#FFF; font-family:Roboto; font-weight:300;  text-align:center; padding:12px 0; border-top:1px solid #555;">
+                </span>
+            </div>
+        </aside>
+        
+        <div style="padding:30px 34px; position:absolute; top:50px; left:52px; right:0; bottom:0; overflow:scroll; background:rgba(253, 253, 253, 1);">            
+            
+            <div class="process">
+                <div class="square" style="width:40px; padding:1px; min-width:0;">
+                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
+                        <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </div>
+            </div>
+
+            <div class="process">
+                <div class="square" style="width:40px; padding:1px; min-width:0;">
+                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
+                        <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </div>
+            </div>
+
+            <div class="process">
+                <div class="square" style="width:40px; padding:1px; min-width:0;">
+                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
+                        <img  src="project_3.jpeg"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </div>
+            </div>
+
+            <div class="process">
+                <div class="square" style="width:40px; padding:1px; min-width:0;">
+                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
+                        <img  src="project_10.png"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </div>
+            </div>
+
+            <div class="process">
+                <div class="square" style="width:40px; padding:1px; min-width:0;">
+                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
+                        <img  src="project_9.png"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </div>
+            </div>
+
+
+            
+        </div>
+    
+    </body>
+
+</html>
