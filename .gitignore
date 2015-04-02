@@ -2,6 +2,9 @@
 *.sqlite
 *.db
 
+#IDE
+*.idea
+
 #logs
 logs/
 *.log
