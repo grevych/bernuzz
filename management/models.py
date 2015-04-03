@@ -6,6 +6,8 @@ class Project(models.Model):
     area = models.CharField("Area", max_length=200)
     logo = models.CharField("Project Logo", max_length=140, blank=True)
     parent_id = models.ForeignKey("Process", verbose_name="Parent Process", null=True)
+    start_date = models.DateField("Start Date", auto_now_add=True)
+    end_date = models.DateField("Start Date", blank=True, null=True)
     active = models.BooleanField("Active", default=True)
 
     class Meta:
@@ -104,6 +106,7 @@ class Skills(models.Model):
 class Announcements(models.Model):
     subject = models.CharField("Subject", max_length=140)
     message = models.CharField("Message", max_length=500)
+    date_time = models.DateTimeField("Announcement Date", auto_now_add=True)
     active = models.BooleanField("Active", default=True)
 
     class Meta:

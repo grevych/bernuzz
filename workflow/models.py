@@ -20,8 +20,9 @@ class Stage(models.Model):
     description = models.CharField("Stage Description", max_length=200)
     responsible = models.IntegerField("Responsible")
     process = models.ForeignKey("Process", verbose_name="Process")
+    start_time = models.DateTimeField("Start Time", auto_now_add=True)
+    end_time = models.DateTimeField("End Date", blank=True, null=True)
     active = models.BooleanField("Active", default=True)
-
     class Meta:
         permissions = (
 
@@ -36,6 +37,8 @@ class Task(models.Model):
     responsible = models.IntegerField("Responsible")
     completedBy = models.IntegerField("Completed By")
     stage = models.ForeignKey("Stage", verbose_name="Stage")
+    start_time = models.DateTimeField("Start Time", auto_now_add=True)
+    end_time = models.DateTimeField("End Date", blank=True, null=True)
     active = models.BooleanField("Active", default=True)
 
     class Meta:
@@ -52,6 +55,7 @@ class StageMessage(models.Model):
     parent_id = models.IntegerField("In reply to")
     stage = models.ForeignKey("Stage", verbose_name="Stage")
     reply_to = models.ForeignKey("StageMessage", verbose_name="Reply to", null=True)
+    date_time = models.DateTimeField("Announcement Date", auto_now_add=True)
     active = models.BooleanField("Active", default=True)
 
     class Meta:
@@ -68,6 +72,7 @@ class TaskMessage(models.Model):
     parent_id = models.IntegerField("In reply to")
     task = models.ForeignKey("Task", verbose_name="Task")
     reply_to = models.ForeignKey("TaskMessage", verbose_name="Reply to", null=True)
+    date_time = models.DateTimeField("Announcement Date", auto_now_add=True)
     active = models.BooleanField("Active", default=True)
 
     class Meta:
