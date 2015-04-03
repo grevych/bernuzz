@@ -27,3 +27,12 @@ vista de settings
 --------
 vista de creacion de procesos
 vista de tipos de procesos
+
+
+
+pagina de proyecto | noticias y configuraciones | agregar colaboradores > procesos > tasks
+pagina de equipo | noticias y configuraciones | agregar miembros > proyectos 
+pagina de proceso -> nuevo o update
+pagina de tasks en dashboard
+
+pagina de configuracion general

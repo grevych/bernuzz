@@ -7,9 +7,11 @@
 -->
 <html>
     <head>
+        <meta charset="utf-8">
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700|Roboto+Condensed:400,700,300|Roboto:100,200,300,400|Lato:200,300,400,500,600' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">  
-        <style>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic|Dosis:200,300,400,500,600,700,800|Noto+Sans:400,700,400italic,700italic|Droid+Sans:400,700|PT+Sans:400,700,400italic,700italic|PT+Sans+Narrow:400,700|Arimo|Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400|Open+Sans+Condensed:300,300italic,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'> 
+       <style>
 
 html, body {
     width:100%;
@@ -27,13 +29,13 @@ a {
 }
 
 
-.square:before {
+.circle:before {
     content: "";
     display: block;
     padding-top: 100%;
 }
 
-.square {
+/*.square {
     margin:0 12px 0 0;
     padding:4px;
     position:relative; 
@@ -45,28 +47,26 @@ a {
     border-radius:2px; 
     float:left;
 }
+*/
 
 
-
-.square {
-    margin:0 12px 0 0;
+.circle {
     background:white;
-    padding:4px;
     position:relative; 
     text-align:center; 
     display:inline-block; 
-    width:10%; 
-    min-width:100px; 
-    border:1px solid #F2F2F2; 
+    width:30px; 
+    /*border:1px solid #F2F2F2; */
     /*overflow:hidden;*/ 
     border-radius:50%; 
-    float:left;
     cursor:pointer;
 }
 
-.square > div {
-    border:1px solid #F2F2F2; 
+.circle > div {
+    /*border:1px solid #F2F2F2; */
     border-radius:50%;
+    position:absolute; 
+    top:0px; left:0px; right:0px; bottom:0px; overflow:hidden;
 }
 
 
@@ -93,7 +93,8 @@ header > * {
 
 .process {
     overflow: hidden;
-    margin-bottom:20px;
+    padding:8px 0;
+    border-bottom: 1px solid #F2F2F2;
 }
         </style>
     </head>
@@ -135,7 +136,7 @@ header > * {
                         </div>
                     </li>
                     <li class="menu-item" style="display:block; position:relative;"> 
-                        <div style=" margin:10px; background:#434343; border-radius:2px; padding:4px;  text-align:center; width:26px;">
+                        <div style=" margin:10px 0 10px 10px; background:#434343; border-radius:2px; padding:4px;  text-align:center; width:26px;">
                             <i style="line-height:26px;"  class="fa fa-code-fork fa-fw"></i>
                         </div>
                     </li>
@@ -153,50 +154,462 @@ header > * {
             </div>
         </aside>
         
-        <div style="padding:30px 34px; position:absolute; top:50px; left:52px; right:0; bottom:0; overflow:scroll; background:rgba(253, 253, 253, 1);">            
+        <div style="position:absolute; top:54px; left:52px; right:0; bottom:0; overflow:scroll; background:rgba(253, 253, 253, 1);">            
+            <div style="border-bottom:1px solid #F2F2F2; background:#FFF; color:#434343; font-weight:400; font-size:14px; font-family:Open Sans; padding:0 34px;">
+                <div style="display:inline-block; padding:10px 0; width:10%; text-align:center; vertical-align:middle; background:">#</div>
+                <div style="display:inline-block; padding:10px 0; width:15%; text-align:center;vertical-align:middle;">Project</div>
+                <div style="display:inline-block; padding:10px 0; width:15%; text-align:center;vertical-align:middle;">Name</div>
+                <div style="display:inline-block; padding:10px 0; width:8%; text-align:center;vertical-align:middle;">Manager</div>
+                <div style="display:inline-block; padding:10px 0; width:10%; text-align:center;vertical-align:middle;">Deadline</div>  
+                <div style="display:inline-block; padding:10px 0; width:8%; text-align:center;vertical-align:middle;">Stages</div>    
+                <div style="display:inline-block; padding:10px 0; width:15%; text-align:center;vertical-align:middle;">Head</div>  
+                <div style="display:inline-block; padding:10px 0; width:8%; text-align:center;vertical-align:middle;">Subprocess</div>   
+                <div style="display:inline-block; padding:10px 0; width:8%; text-align:center;vertical-align:middle;">Status</div>      
+
+            </div>
+
+            <div style="padding:0 34px;">
+
+
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFAB7F; border-radius:4px;">935183439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Innovation Workshop</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Requerimientos</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="profile.jpeg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">67 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">1 of 5
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFAB7F; border-radius:4px;">935193439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Innovation Workshop</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Diseño</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="profile.jpg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">128 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">23 of 34
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#7FC0FF; border-radius:4px;">835294439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">FileStory</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Implementación</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="project_4.jpeg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">8 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8 of 12
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFD27F; border-radius:4px;">835294439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">New Project</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Análisis de mercado</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="user.jpg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">45 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">6 of 9
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFAB7F; border-radius:4px;">935183439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Innovation Workshop</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Requerimientos</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="profile.jpeg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">67 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">1 of 5
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFAB7F; border-radius:4px;">935193439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Innovation Workshop</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Diseño</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="profile.jpg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">128 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">23 of 34
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#7FC0FF; border-radius:4px;">835294439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">FileStory</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Implementación</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="project_4.jpeg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">8 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8 of 12
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFD27F; border-radius:4px;">835294439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">New Project</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Análisis de mercado</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="user.jpg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">45 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">6 of 9
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFAB7F; border-radius:4px;">935183439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Innovation Workshop</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Requerimientos</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="profile.jpeg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">67 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">1 of 5
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFAB7F; border-radius:4px;">935193439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Innovation Workshop</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Diseño</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="profile.jpg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">128 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">23 of 34
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#7FC0FF; border-radius:4px;">835294439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">FileStory</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Implementación</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="project_4.jpeg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">8 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8 of 12
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFD27F; border-radius:4px;">835294439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">New Project</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Análisis de mercado</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="user.jpg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">45 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">6 of 9
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFAB7F; border-radius:4px;">935183439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Innovation Workshop</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Requerimientos</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="profile.jpeg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">67 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">1 of 5
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFAB7F; border-radius:4px;">935193439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Innovation Workshop</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Diseño</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="profile.jpg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">128 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">23 of 34
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#7FC0FF; border-radius:4px;">835294439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">FileStory</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Implementación</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="project_4.jpeg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">8 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8 of 12
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+                <div class="process" style="color:#434343; font-weight:300; font-size:14px; font-family:Open Sans;">
+<!--                     <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div> -->
+
+                    <div style="display:inline-block; width:10%; text-align:center; vertical-align:middle; background:#FFD27F; border-radius:4px;">835294439</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">New Project</div>
+                    <div style="display:inline-block; width:15%; text-align:center; vertical-align:middle;">Análisis de mercado</div>
+                    <div style="display:inline-block; width:8%; text-align:center; vertical-align:middle;">
+                        <div class="circle" >
+                            <div style="">
+                                <img  src="user.jpg"  style=" position:relative; width:100%;  ">
+                            </div> 
+                        </div>
+                    </div>
+                    <div style="display:inline-block; width:10%;  text-align:center; vertical-align:middle;">45 days</div>
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">6 of 9
+                    </div>
+
+                    <div style="display:inline-block; width:8%;  text-align:center; vertical-align:middle;">8</div>
+                </div>
+
+
+
+<!-- 
+                <div class="process">
+                    <div class="square" >
+                        <div style="">
+                            <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="process">
+                    <div class="square" >
+                        <div style="">
+                            <img  src="project_3.jpeg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="process">
+                    <div class="square" >
+                        <div style="">
+                            <img  src="project_10.png"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="process">
+                    <div class="square" >
+                        <div style="">
+                            <img  src="project_9.png"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div>
+                </div> -->
+            </div>
+
             
-            <div class="process">
-                <div class="square" style="width:40px; padding:1px; min-width:0;">
-                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
-                        <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
-                    </div> 
-                </div>
-            </div>
-
-            <div class="process">
-                <div class="square" style="width:40px; padding:1px; min-width:0;">
-                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
-                        <img  src="project_1.jpg"  style=" position:relative; width:100%;  ">
-                    </div> 
-                </div>
-            </div>
-
-            <div class="process">
-                <div class="square" style="width:40px; padding:1px; min-width:0;">
-                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
-                        <img  src="project_3.jpeg"  style=" position:relative; width:100%;  ">
-                    </div> 
-                </div>
-            </div>
-
-            <div class="process">
-                <div class="square" style="width:40px; padding:1px; min-width:0;">
-                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
-                        <img  src="project_10.png"  style=" position:relative; width:100%;  ">
-                    </div> 
-                </div>
-            </div>
-
-            <div class="process">
-                <div class="square" style="width:40px; padding:1px; min-width:0;">
-                    <div style="position:absolute; top:1px; left:1px; right:1px; bottom:1px; overflow:hidden;">
-                        <img  src="project_9.png"  style=" position:relative; width:100%;  ">
-                    </div> 
-                </div>
-            </div>
-
-
-            
+fecha de inicio, dias que lleva el proceso, hacer todo en cuadros con el manager a la derecha
+<!--                 procesos-> id, tipo de proceso o tarea, stage actual, encargado, proceso padre (si es subproceso), proyecto, deadline, estatus, evidencias, participantes
+                ordenar por-> proyecto, equipos, estatus (completados, etc) -->
         </div>
     
     </body>
