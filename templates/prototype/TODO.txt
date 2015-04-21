@@ -36,3 +36,53 @@ pagina de proceso -> nuevo o update
 pagina de tasks en dashboard
 
 pagina de configuracion general
+
+
+
+
+
+
+
+URLS
+
+pagina de proyecto | noticias y configuraciones | agregar colaboradores > procesos > tasks
+pagina de equipo | noticias y configuraciones | agregar miembros > proyectos 
+pagina de proceso -> nuevo o update
+pagina de tasks en dashboard
+
+pagina de configuracion general
+
+
+bernarduzzperuzzorozzcuu.com/
+
+/projects
+/teams
+/workflows
+/tasks
+
+/username
+/username/project
+    announcements
+/username/project/settings
+/username/project/workflows
+/username/project/(workflow_hash)
+/username/project/tasks
+/username/project/settings
+    roles
+/username/settings
+
+/teamname
+    announcements
+
+    
+/teamname/project
+    announcements
+    
+/teamname/project/settings
+/teamname/project/workflows
+/teamname/project/(workflow_hash)
+/teamname/project/tasks
+/teamname/project/settings
+    roles
+/teamname/settings
+    roles

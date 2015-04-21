@@ -1,14 +1,16 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 
 class Project(models.Model):
-    name = models.CharField("Project Name", max_length=200)
-    area = models.CharField("Area", max_length=200)
-    logo = models.CharField("Project Logo", max_length=140, blank=True)
-    parent_id = models.ForeignKey("Process", verbose_name="Parent Process", null=True)
-    start_date = models.DateField("Start Date", auto_now_add=True)
-    end_date = models.DateField("Start Date", blank=True, null=True)
-    active = models.BooleanField("Active", default=True)
+    name = models.CharField('Project name', max_length=200)
+    area = models.CharField('Area', max_length=200)
+    logo = models.CharField('Project logo', max_length=140, blank=True)
+    parent_id = models.ForeignKey('Project', verbose_name='Parent process', null=True)
+    start_date = models.DateField('Start date', auto_now_add=True)
+    end_date = models.DateField('Start date', blank=True, null=True)
+    active = models.BooleanField('Active', default=True)
 
     class Meta:
         permissions = (
@@ -20,23 +22,23 @@ class Project(models.Model):
 
 
 class ProjectPrivacy(models.Model):
-    name = models.CharField("Project Privacy", max_length=100)
-    project = models.ForeignKey("Project", verbose_name="Project")
-    active = models.BooleanField("Active", default=True)
+    name = models.CharField('Project privacy', max_length=100)
+    project = models.ForeignKey('Project', verbose_name='Project')
+    active = models.BooleanField('Active', default=True)
 
     class Meta:
-        permission = (
+        permissions = (
 
         )
 
     def __unicode__(self):
-        return "%s - %s" % (self.project.name, self.name)
+        return '%s - %s' % (self.project.name, self.name)
 
 
 class ProjectStatus(models.Model):
-    name = models.CharField("Project Status", max_length=140)
-    project = models.ForeignKey("Project", verbose_name="Project")
-    active = models.BooleanField("Active", default=True)
+    name = models.CharField('Project status', max_length=140)
+    project = models.ForeignKey('Project', verbose_name='Project')
+    active = models.BooleanField('Active', default=True)
 
     class Meta:
         permissions = (
@@ -44,27 +46,13 @@ class ProjectStatus(models.Model):
         )
 
     def __unicode__(self):
-        return "%s - %s" % (self.project.name, self.name)
+        return '%s - %s' % (self.project.name, self.name)
 
 
-class CollegeProjects(models.Model):
-    project = models.ForeignKey("Project", verbose_name="Project")
-    college = models.ForeignKey("College", verbose_name="College")
-    active = models.BooleanField("Active", default=True)
-
-    class Meta:
-        permissions = (
-
-        )
-
-    def __unicode__(self):
-        return "%s - %s" % (self.project.name, self.college.name)
-
-
-class ProjectSkills(models.Model):
-    skill = models.ForeignKey("Skills", verbose_name="Skill")
-    project = models.ForeignKey("Project", verbose_name="Project")
-    active = models.BooleanField("Active", default=True)
+class CollegeProject(models.Model):
+    project = models.ForeignKey('Project', verbose_name='Project')
+    college = models.ForeignKey('College', verbose_name='College')
+    active = models.BooleanField('Active', default=True)
 
     class Meta:
         permissions = (
@@ -72,13 +60,13 @@ class ProjectSkills(models.Model):
         )
 
     def __unicode__(self):
-        return "%s - %s" % (self.skill.name, self.project.name)
+        return '%s - %s' % (self.project.name, self.college.name)
 
 
-class ProjectProcesses(models.Model):
-    project = models.ForeignKey("Project", verbose_name="Project")
-    process = models.ForeignKey("workflow.Process", verbose_name="Process")
-    active = models.BooleanField("Active", default=True)
+class ProjectSkill(models.Model):
+    skill = models.ForeignKey('Skill', verbose_name='Skill')
+    project = models.ForeignKey('Project', verbose_name='Project')
+    active = models.BooleanField('Active', default=True)
 
     class Meta:
         permissions = (
@@ -86,13 +74,27 @@ class ProjectProcesses(models.Model):
         )
 
     def __unicode__(self):
-        return "%s - %s" % (self.project.name, self.process.name)
+        return '%s - %s' % (self.skill.name, self.project.name)
 
 
-class Skills(models.Model):
-    name = models.CharField("Skill Name", max_length=140)
-    description = models.CharField("Skill Description", max_length=300)
-    active = models.BooleanField("Active", default=True)
+class ProjectProcess(models.Model):
+    project = models.ForeignKey('Project', verbose_name='Project')
+    process = models.ForeignKey('workflow.Process', verbose_name='Process')
+    active = models.BooleanField('Active', default=True)
+
+    class Meta:
+        permissions = (
+
+        )
+
+    def __unicode__(self):
+        return '%s - %s' % (self.project.name, self.process.name)
+
+
+class Skill(models.Model):
+    name = models.CharField('Skill name', max_length=140)
+    description = models.CharField('Skill description', max_length=300)
+    active = models.BooleanField('Active', default=True)
 
     class Meta:
         permissions = (
@@ -103,11 +105,11 @@ class Skills(models.Model):
         return self.name
 
 
-class Announcements(models.Model):
-    subject = models.CharField("Subject", max_length=140)
-    message = models.CharField("Message", max_length=500)
-    date_time = models.DateTimeField("Announcement Date", auto_now_add=True)
-    active = models.BooleanField("Active", default=True)
+class Announcement(models.Model):
+    subject = models.CharField('Subject', max_length=140)
+    message = models.CharField('Message', max_length=500)
+    date_time = models.DateTimeField('Announcement date', auto_now_add=True)
+    active = models.BooleanField('Active', default=True)
 
     class Meta:
         permissions = (
@@ -119,10 +121,10 @@ class Announcements(models.Model):
 
 
 class College(models.Model):
-    name = models.CharField("Institution Name", max_length=140)
-    campus = models.CharField("Campus", max_length=140)
-    city = models.CharField("City", max_length=140)
-    state = models.CharField("State", max_length=140)
+    name = models.CharField('Institution name', max_length=140)
+    campus = models.CharField('Campus', max_length=140)
+    city = models.CharField('City', max_length=140)
+    state = models.CharField('State', max_length=140)
 
     class Meta:
         permissions = (
