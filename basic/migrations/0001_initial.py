@@ -13,12 +13,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Member',
+            name='User',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
-                ('enrollment', models.CharField(max_length=15, verbose_name='Enrollment')),
-                ('career', models.CharField(max_length=50, verbose_name='Career')),
-                ('active', models.BooleanField(default=True, verbose_name='Active')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('enrollment', models.CharField(max_length=15, verbose_name=b'Enrollment')),
+                ('career', models.CharField(max_length=50, verbose_name=b'Career')),
+                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={

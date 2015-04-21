@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 
@@ -31,7 +33,7 @@ class ProjectPrivacy(models.Model):
         )
 
     def __unicode__(self):
-        return "%s - %s" % (self.project.name, self.name)
+        return '%s - %s' % (self.project.name, self.name)
 
 
 class ProjectStatus(models.Model):
@@ -44,7 +46,7 @@ class ProjectStatus(models.Model):
         )
 
     def __unicode__(self):
-        return "%s - %s" % (self.project.name, self.name)
+        return '%s - %s' % (self.project.name, self.name)
 
 
 class CollegeProject(models.Model):
@@ -59,7 +61,7 @@ class CollegeProject(models.Model):
         )
 
     def __unicode__(self):
-        return "%s - %s" % (self.project.name, self.college.name)
+        return '%s - %s' % (self.project.name, self.college.name)
 
 
 class ProjectSkill(models.Model):
@@ -74,7 +76,7 @@ class ProjectSkill(models.Model):
         )
 
     def __unicode__(self):
-        return "%s - %s" % (self.skill.name, self.project.name)
+        return '%s - %s' % (self.skill.name, self.project.name)
 
 
 class Skill(models.Model):
@@ -107,10 +109,10 @@ class Announcement(models.Model):
 
 
 class College(models.Model):
-    name = models.CharField("Institution Name", max_length=140)
-    campus = models.CharField("Campus", max_length=140)
-    city = models.CharField("City", max_length=140)
-    state = models.CharField("State", max_length=140)
+    name = models.CharField('Institution name', max_length=140)
+    campus = models.CharField('Campus', max_length=140)
+    city = models.CharField('City', max_length=140)
+    state = models.CharField('State', max_length=140)
 
     class Meta:
         permissions = (

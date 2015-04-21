@@ -1,3 +1,6 @@
+# -*- coding:utf-8 -*-
+
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Team
 # Create your views here.
@@ -10,3 +13,7 @@ def dashboard_teams(request):
     template_variables['group'] = teams
     template_variables['title'] = "Teams"
     return render(request, template, template_variables)
+
+def login(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+

@@ -1,31 +1,13 @@
 # -*- coding:utf-8 -*-
-"""
-Django settings for bernuzz project.
 
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
+from private import *
+
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3s_rm_^x*=g(k*!()*$ls*6hn5jm8&7l8l9ck5v(owt@hzfo-y'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
+print BASE_DIR
 
 
 # Application definition
@@ -37,12 +19,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'basic',
-    'hierarchy',
-    'management',
-    'workflow',
     'social.apps.django_app.default',
     #'social.apps.django_app.me',
+    'basic',
+    'hierarchy',
+    'workflow',
+    'management',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -65,12 +47,8 @@ WSGI_APPLICATION = 'bernuzz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bernuzz',
-        'USER': 'bernuzz',
-        'PASSWORD': 'devel',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -103,6 +81,8 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth',
     'social.backends.twitter.TwitterOAuth',
     'social.backends.yahoo.YahooOpenId',
+    'social.backends.google.GooglePlusAuth',
+
 
     #For username/password login
     'django.contrib.auth.backends.ModelBackend',
@@ -111,8 +91,14 @@ AUTHENTICATION_BACKENDS = (
 
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
+    
+)
+
+TEMPLATE_DIRS = (
+    'templates/',
 )
 
 # backends: context processor will load a backends key in the context with three entries on it:
@@ -121,7 +107,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # backends: A list of all available backend names.
 
 
-SOCIAL_AUTH_USER_MODEL = 'foo.bar.User'
+#SOCIAL_AUTH_USER_MODEL = 'django.contrib.auth.models.User'
 
 #SOCIAL_AUTH_STORAGE = 'social.apps.django_app.me.models.DjangoStorage'
 
@@ -160,29 +146,11 @@ SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
 
 SOCIAL_AUTH_SESSION_EXPIRATION = False
 
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__),
-                 '..', 'templates').replace('\\', '/'),)
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
-MEDIA_ROOT = (os.path.join(os.path.dirname(__file__),
-              '..', 'media').replace('\\', '/'))
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = 'http://127.0.0.1:8000/media/'
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    'templates',
-)
+SOCIAL_AUTH_GOOGLE_OAUTH2_USE_UNIQUE_USER_ID = False
+SOCIAL_AUTH_GOOGLE_PLUS_AUTH_EXTRA_ARGUMENTS = {
+      'access_type': 'offline'
+}
