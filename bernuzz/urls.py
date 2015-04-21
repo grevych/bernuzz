@@ -9,24 +9,15 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'bernuzz.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'', include('basic.urls')),
-    url(r'', include('hierarchy.urls')),
-    url(r'^projects/', 'basic.views.login'),
-    # url(r'^teams/', ),
-    # url(r'^workflows/', ),
-    # url(r'^tasks/', ),
+    url(r'', include('basic.urls', namespace='basic')),
+    url(r'', include('hierarchy.urls', namespace='hierarchy')),
+    url(r'', include('management.urls', namespace='management')),
+    url(r'', include('workflow.urls', namespace='workflow')),
+#    url(r'^/$', '', name='dashboard'),
 
-
-
-
-    # url(r'(?P<username>\w+)/', ),
-    # url(r'(?P<teamname>\w+)/', ),
-    # url(r'', ),
-    # url(r'', ),
-    # url(r'', ),
-
-    url('', include('social.apps.django_app.urls', namespace='social')),
-
+    url(r'', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^admin/', include(admin.site.urls)),
+)
 
 # /username
 # /username/project
@@ -54,9 +45,3 @@ urlpatterns = patterns('',
 #     roles
 # /teamname/settings
 #     roles
-
-
-
-
-    url(r'^admin/', include(admin.site.urls)),
-)
