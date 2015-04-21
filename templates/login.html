@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<!--
+    DASHBOARD DE USUARIO
+
+
+-->
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700|Roboto+Condensed:400,700,300|Roboto:100,200,300,400|Lato:200,300,400,500,600' rel='stylesheet' type='text/css'>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <style>
+html, body {
+    width:100%;
+    height:100%;
+}
+
+* {
+    margin:0;
+    padding:0;
+}
+
+a {
+    text-decoration: none;
+    color:inherit;
+}
+
+
+.square:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.square {
+    margin:0 12px 12px 0;
+    padding:4px;
+    position:relative;
+    text-align:center;
+    display:inline-block;
+    width:10%;
+    min-width:100px;
+    border:1px solid #F2F2F2;
+    overflow:hidden;
+    border-radius:2px;
+    float:left;
+}
+
+
+
+.square {
+    margin:0 12px 12px 0;
+    background:white;
+    padding:4px;
+    position:relative;
+    text-align:center;
+    display:inline-block;
+    width:10%;
+    min-width:100px;
+    border:1px solid #F2F2F2;
+    overflow:hidden;
+    border-radius:2px;
+    float:left;
+    cursor:pointer;
+}
+
+.square > div {
+    border:1px solid #F2F2F2;
+}
+
+
+.search_input:focus {
+
+    outline:none;
+    width:90% !important;
+}
+
+
+/*header::after {
+    content:"";
+    position:absolute;
+    bottom:-10px;
+    left:134px;
+    width: 0;
+    height: 0;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    border-top: 10px solid white;
+}
+
+header::before {
+    content:"";
+    position:absolute;
+    bottom:-10px;
+    left:136px;
+    width: 0;
+    height: 0;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    border-top: 10px solid rgba(0, 0, 0, .1);
+}*/
+
+header > * {
+    vertical-align: middle;
+}
+
+
+.menu-item > div:hover {
+    background:#A322AE;
+}
+
+.menu-item > div {
+    cursor:pointer;
+}
+        </style>
+    </head>
+
+
+    <body>
+        <header style="padding:10px 0; height:auto; box-shadow:0 0 8px rgba(0, 0, 0, .1); z-index:200; background:#FFF; position:fixed; top:0; left:0px; right:0;">
+
+            <div style="boxshadow:0 0 8px rgba(0, 0, 0, .1);   display:inline-block; ">
+                <div style="overflow:hidden;">
+
+                    <span style="display:inline-block; text-align:center; margin-left:10px; font-family:Roboto Condensed; padding:4px 0; font-weight:400; font-size:24px; width:34px; height:26px; border-radius:2px; background:#323232; float:left; line-height:24px; color:#FFF;">Bz</span>
+                    <div style="display:inline-block; float:left; margin-left:8px; border-radius:2px; overflow:hidden; width:34px; height:34px; "><img width="34px" src="profile.jpg"></div>
+                </div>
+            </div>
+
+            <div  style="display:inline-block; overflow:hidden;  vertical-align:middle; margin-left:6px;">
+                <i style="padding:4px 8px; font-size:14px; line-height:18px; position:relative; z-index:351;" class="fa fa-search"></i>
+                <input class="search_input" placeholder="Busca proyectos, equipos, creadores" type="text"  style=" width:234px;
+                 padding:4px 12px 4px 32px; display:inline-block; position:relative;  background:transparent; line-height:24px;font-size: 14px;
+                font-weight: lighter;  border-radius:2px;
+                font-family: Roboto; border: 1px solid #CACACA; background:#FFF; margin-left:-33px; position:relative; z-index:350;">
+                </input>
+            </div>
+
+            <div style="float:right; display:inline-block; padding-right:80px; width:auto; line-height:26px;">
+                <span style="font-size:14px; color:#323232;  line-height:20px;"><i class="fa fa-plus"></i></span>
+                <span style="font-size:14px; color:#323232;  line-height:20px;"><i class="fa fa-sort-desc"></i></span>
+            </div>
+
+        </header>
+    </body>
+
+</html>
