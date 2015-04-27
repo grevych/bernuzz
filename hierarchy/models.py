@@ -20,6 +20,7 @@ class TeamMember(models.Model):
     user = models.ForeignKey('basic.User', verbose_name='User')
     team = models.ForeignKey('Team', verbose_name='Team')
     active = models.BooleanField('Active', default=True)
+
     class Meta:
         permissions = (
         )

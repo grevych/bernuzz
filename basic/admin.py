@@ -1,12 +1,12 @@
 from django.contrib import admin
-from basic.models import Member
+from basic.models import User
 from hierarchy.models import Team, TeamMember, Role
 from workflow.models import Process, ProjectProcess, Task, Stage, TaskMessage, StageMessage
 from management.models import Project, ProjectPrivacy, ProjectSkill, ProjectStatus, College, CollegeProject, Skill, \
     Announcement
 # Register your models here.
 
-admin.site.register(Member)
+admin.site.register(User)
 admin.site.register(Team)
 admin.site.register(TeamMember)
 admin.site.register(Role)

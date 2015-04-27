@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='teammembers',
             name='user',
-            field=models.ForeignKey(verbose_name='User', to='basic.Member'),
+            field=models.ForeignKey(verbose_name='User', to='basic.User'),
             preserve_default=True,
         ),
         migrations.AddField(
