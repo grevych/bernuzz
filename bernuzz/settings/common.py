@@ -6,7 +6,7 @@ from private import *
 
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 print BASE_DIR
 
 
@@ -71,12 +71,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+print os.path.join(BASE_DIR, 'static')
+
 
 
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.open_id.OpenIdAuth',
-    'social.backends.google.GoogleOpenId',
+    #'social.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOpenIdConnect',
     'social.backends.google.GoogleOAuth2',
     'social.backends.google.GoogleOAuth',
     'social.backends.twitter.TwitterOAuth',
@@ -114,17 +120,14 @@ TEMPLATE_DIRS = (
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
+#Used to redirect the user once the auth process ended successfully. The value of ?next=/foo is used if it was present '/logged-in/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
+#URL where the user will be redirected in case of an error '/login-error/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 
-
-#Used to redirect the user once the auth process ended successfully. The value of ?next=/foo is used if it was present
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/logged-in/'
-
-#URL where the user will be redirected in case of an error
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
-
-#Is used as a fallback for LOGIN_ERROR_URL
-SOCIAL_AUTH_LOGIN_URL = '/login-url/'
+#Is used as a fallback for LOGIN_ERROR_URL '/login-url/'
+SOCIAL_AUTH_LOGIN_URL = '/'
 
 #Used to redirect new registered users, will be used in place of SOCIAL_AUTH_LOGIN_REDIRECT_URL if defined.
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'

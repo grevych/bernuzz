@@ -1,5 +1,6 @@
 .DS_Store
 *.sqlite
+*.sqlite3
 *.db
 
 #IDE

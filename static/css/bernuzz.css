@@ -1,0 +1,97 @@
+
+body {
+    background: rgba(253, 253, 253, 1);
+}
+
+.logo {
+    font-family:Roboto Condensed;
+}
+
+.motto {
+    font-family:Open Sans;
+    font-weight:200;
+}
+
+
+.wrapper {
+    min-width:900px;
+}
+
+
+.square:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.square {
+    margin:0 24px 34px 0;
+    /*padding:4px;*/
+    position:relative; 
+    text-align:center; 
+    display:inline-block; 
+    /*width:10%; */
+    width:5%;
+    min-width:80px; 
+    /*border:1px solid #F2F2F2;*/
+    /*border-radius:50%; */
+    border-radius:4px;
+    /*float:left;*/
+/*    box-shadow: 2px 2px 6px -2px #AEAEAE;*/
+/*    box-shadow: 1px 1px 6px -2px #6A6A6A;*/
+    margin:3.7px;
+}
+
+
+
+.square > div {
+    /*border:1px solid #F2F2F2; */
+    /*border-radius:50%;*/
+    border-radius: 4px;
+    overflow:hidden;
+    position:absolute; 
+    top:0; left:0; right:0; bottom:0;
+}
+
+
+
+
+
+#googleSignInButton {
+  display: inline-block;
+  background: #4285f4;
+  color: white;
+  border-radius: 2px;
+  white-space: nowrap;
+  margin-top:40px;
+}
+
+    #googleSignInButton > .icon {
+      background: url('https://developers.google.com/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      width: 42px;
+      height: 42px;
+      border-right: #2265d4 1px solid;
+    }
+
+    #googleSignInButton > .text {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 42px;
+      padding-right: 42px;
+      font-size: 14px;
+      font-weight: bold;
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: 'Roboto', sans-serif;
+    }
+
+
+
+
+
+/*******************
+        ASIDE
+********************/
+
+

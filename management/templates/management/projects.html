@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="content" style="">
+    <!-- overflow:scroll; -->
+    <div style="padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;">
+        
+        {% for i in  projects %}
+        <div class="square" >
+            <div style=" overflow:hidden;">
+                <img  src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  ">
+            </div> 
+        </div>
+        {% endfor %}
+
+
+
+        
+        <div class="square" >
+            <div style="">
+                <img  src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  ">
+            </div> 
+<!--                 <div style="position:absolute; overflow:hidden; width:50px; height:50px;right:-6px; bottom:-6px; background:white; border-radius:25px; border:1px solid #EFEFEF; box-shadow:2px 2px 8px -2px #A8A8A8;">
+                <img  src="team_1.png"  style=" position:relative; width:100%;  ">
+            </div>  -->
+        </div>
+
+
+        
+        <div class="square" >
+            <div style="">
+                <img  src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  ">
+            </div> 
+        </div>  
+
+        <div class="square" >
+            <div style=" background:#E30A12;">
+                <div style="vertical-align:middle; font-family:Roboto; font-size:80px;">B</div>
+            </div> 
+        </div>
+        <div class="square" >
+            <div style="">
+                <img  src="project_5.png"  style=" position:relative; width:100%;  ">
+            </div> 
+            <div style="position:absolute; overflow:hidden; width:50px; height:50px;right:-6px; bottom:-6px; background:white; border-radius:25px; border:1px solid #EFEFEF; box-shadow:2px 2px 8px -2px #A8A8A8;">
+                <img  src="team_1.png"  style=" position:relative; width:100%;  ">
+            </div> 
+        </div>     
+
+        <div class="square" style="overflow:visible;">
+            <div style="">
+                <img  src="project_6.png"  style=" position:relative; width:100%;  ">
+            </div> 
+
+        </div>     
+        <div class="square" >
+            <div style="">
+                <img  src="project_10.png"  style=" position:relative; width:100%;  ">
+            </div> 
+        </div>        
+    </div>
+
+    <div style="width:25%; right:0; height:100%; display:inline-block; float:left; background:#FFF; position:fixed;">
+        <div style="border-left:1px solid #F2F2F2; width:100%; height:100%; overflow-y:scroll; position:absolute; ">
+            <div style="padding:28px 24px 18px;">
+                <div class="square" style="width:60px; margin:0 10px 10px 0; vertical-align:top;" >
+                    <div style=" overflow:hidden;">
+                        <img  src="project_5.png"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </div>
+                <div style="display:inline-block; vertical-align:top;">
+                    <div style="font-family:Open Sans; font-size:14px; font-weight:400; color:#434343;">FileStory</div>
+                    <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343;">ITESM Campus Querétaro</div>
+                    <div style="font-family:Open Sans; font-size:12px; font-weight:300; color:#434343; background:#FDAD73; padding:1px 6px; display:inline-block; border-radius:2px;">Stand by</div>
+                </div>
+            </div>
+
+
+            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">Focus on being creative, not organizing Files.</div>
+            
+            </div>
+
+            <div style="padding:2px 24px; border-top:1px solid #F2F2F2;">
+                <!-- <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; margin-top:12px;">Team</div> -->
+                <div style="">
+                    <div class="square" style="width:40px; margin:8px 2px; vertical-align:top; border-radius:50%;" >
+                        <div style=" overflow:hidden; border-radius:50%;">
+                            <img  src="project_4.jpeg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div>  
+                    <div class="square" style="width:40px; margin:8px 2px; vertical-align:top; border-radius:50%;" >
+                        <div style=" overflow:hidden; border-radius:50%;">
+                            <img  src="profile.jpg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div>  
+                    <div class="square" style="width:40px; margin:8px 2px; vertical-align:top; border-radius:50%;" >
+                        <div style=" overflow:hidden; border-radius:50%;">
+                            <img  src="profile.jpeg"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div>  
+                </div>
+            </div>
+            
+
+            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">News</div>
+
+                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">Config</div>
+            
+            </div>
+        rol, permisos, icono, nombre, descripcion, miembros, tasks
+        agregar miembro, configuracion, editar
+
+        barra lateral durante tasks servira para mensajes y archivos, a que proceso pertenece, quien era el encargado, quien lo hizo, etc, evidencias, artefactos
+
+        ver si un proyecto a huevo necesita una entidad equipo o puede tener colaboradores estilo github
+
+        agregar filtro a procesos y tasks por equipo o por proyecto
+
+        en el aside de equipo que salgan las noticias de los equipos, mensajes, etc
+
+        aside -> mensajes, archivos, tasks, procesos, miembros(equipo), colaboradores (proyecto), versiones, timeline estilo github (noticias)
+
+        en fotos de miembros mandar a la url del rol del usuario o lo referente a el en el proyecto o equipo
+
+
+        documentos finales, pueden ser visibles (publicos o no :D ), artefactos o evidencias publicas o privadas
+
+            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">News</div>
+
+                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">Config</div>
+            
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+    
+</div>
+{% endblock %}

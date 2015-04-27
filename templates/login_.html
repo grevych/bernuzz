@@ -1,0 +1,43 @@
+
+<meta name="google-signin-client_id" content="{{ plus_id }}">
+<div id="a" class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<form id="google-plus" method="post" action="{% url 'social:complete' "google-oauth2" %}">
+    {% csrf_token %}
+    <input id="at" type="hidden" name="access_token" value="" />
+    <input id="code" type="hidden" name="code" value="" />
+</form>
+
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+
+<script type="text/javascript">
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId());
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+}
+
+function renderButton() {
+    console.log('hola');
+      gapi.signin2.render('a', {
+        'width': 220,
+        'height': 40,
+        'longtitle': true,
+      });
+    }
+
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+</script>
+
+
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<a href="javascript:signOut();">sign out</a>

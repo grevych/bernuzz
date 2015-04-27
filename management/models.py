@@ -21,6 +21,13 @@ class Project(models.Model):
         return self.name
 
 
+class ProjectUser(models.Model):
+    project = models.ForeignKey('Project', verbose_name='Project', related_name='users')
+    user = models.ForeignKey('basic.User', verbose_name='User', related_name='projects')
+    active = models.BooleanField('Active', default=True)
+    owner = models.BooleanField('Owner', default=False)
+
+
 class ProjectPrivacy(models.Model):
     name = models.CharField('Project privacy', max_length=100)
     project = models.ForeignKey('Project', verbose_name='Project')
