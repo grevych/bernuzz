@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<header class="main">            
+    <div class="box">
+        <i class="fa fa-search icon" style="z-index:351;"></i>
+        <input class="search_input" placeholder="Busca proyectos, equipos, creadores" type="text" 
+            style=" width:234px; padding:4px 12px 4px 32px; display:inline-block; position:relative;  
+                    background:transparent; line-height:24px;font-size: 14px; font-weight: lighter;  
+                    border-radius:2px; font-family: Roboto; border: 1px solid #CACACA; background:#FFF; 
+                    margin-left:-33px; position:relative; z-index:350;">
+        </input>
+    </div>
+    
+    <div class="box" style="float:right; padding-right:80px; color:#323232;">
+        <div style=" padding:0 8px; margin:0 18px; line-height:28px;">
+            <i class="fa fa-plus " style="line-height:28px; font-size:14px;"></i>
+        </div>
+        <div class="box" style="padding:0 8px; margin:0 8px; line-height:28px;">
+            <div style="border-radius:2px; overflow:hidden; width:28px; height:28px;">
+                <img width="28px" src="{% static 'img/profile.jpeg' %}">
+            </div>
+            <span style="font-size:14px; color:#323232; margin-left:8px; line-height:20px;">
+                <i class="fa fa-sort-desc"></i>
+            </span>
+        </div>
+    </div>
+
+</header>

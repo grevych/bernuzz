@@ -20,6 +20,9 @@ def render_teams(request):
 def login(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
+def default(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
 
 def create_team(request):
     template = "base.html"

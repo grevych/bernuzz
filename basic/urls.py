@@ -5,6 +5,6 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
 
-    url(r'^login/$', 'basic.views.login'),
+    url(r'^$', 'basic.views.index'),
 
 )
