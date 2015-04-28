@@ -160,3 +160,9 @@ aside.main {
     overflow:scroll;
     /* overflow:hidden; */
 }
+
+.label {
+    padding: 4px 8px;
+    line-height: 18px;
+    position: relative;
+}

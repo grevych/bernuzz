@@ -4,10 +4,12 @@ from django.db import models
 
 
 class Project(models.Model):
-    name = models.CharField('Project name', max_length=200)
+    name = models.CharField('Project name', max_length=200, unique=True)
+    description = models.CharField('Project description', max_length=600, blank=True)
     area = models.CharField('Area', max_length=200)
     logo = models.CharField('Project logo', max_length=140, blank=True)
-    parent_id = models.ForeignKey('Project', verbose_name='Parent process', null=True)
+    parent_id = models.ForeignKey('Project', verbose_name='Parent project', null=True, blank=True)
+    team = models.ForeignKey('hierarchy.Team', verbose_name='Team', null=True, blank=True)
     start_date = models.DateField('Start date', auto_now_add=True)
     end_date = models.DateField('Start date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
@@ -24,8 +26,16 @@ class Project(models.Model):
 class ProjectUser(models.Model):
     project = models.ForeignKey('Project', verbose_name='Project', related_name='users')
     user = models.ForeignKey('basic.User', verbose_name='User', related_name='projects')
-    active = models.BooleanField('Active', default=True)
+    #active = models.BooleanField('Active', default=True)
     owner = models.BooleanField('Owner', default=False)
+
+    class Meta:
+        permissions = (
+
+        )
+
+    def __unicode__(self):
+        return '%d: %s -> %s' % (self.pk, self.project.name, self.user, )
 
 
 class ProjectPrivacy(models.Model):
@@ -45,6 +55,7 @@ class ProjectPrivacy(models.Model):
 class ProjectStatus(models.Model):
     name = models.CharField('Project status', max_length=140)
     project = models.ForeignKey('Project', verbose_name='Project')
+    #date
     active = models.BooleanField('Active', default=True)
 
     class Meta:

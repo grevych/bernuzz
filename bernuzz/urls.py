@@ -22,7 +22,10 @@ urlpatterns = patterns('',
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     
 
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) 
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT, show_indexes=True)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
 
 # /username
 # /username/project

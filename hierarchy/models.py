@@ -17,15 +17,16 @@ class Team(models.Model):
 
 
 class TeamMember(models.Model):
-    user = models.ForeignKey('basic.User', verbose_name='User')
-    team = models.ForeignKey('Team', verbose_name='Team')
+    user = models.ForeignKey('basic.User', verbose_name='User', related_name='teams')
+    team = models.ForeignKey('Team', verbose_name='Team', related_name='users')
+    #date = models.DateField()
     active = models.BooleanField('Active', default=True)
     class Meta:
         permissions = (
         )
 
     def __unicode__(self):
-        return '%s - %s' % (self.user.name, self.team.name)
+        return '%s - %s' % (self.user.user.username, self.team.name)
 
 
 class Role(models.Model):
