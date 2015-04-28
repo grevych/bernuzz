@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'bernuzz.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'', include('basic.urls', namespace='basic')),
     url(r'', include('hierarchy.urls', namespace='hierarchy')),
     url(r'', include('management.urls', namespace='management')),
@@ -19,7 +20,7 @@ urlpatterns = patterns('',
     #url(r'^/$', '', name='dashboard'),
     # /explore name=explore -> app?
 
-    url(r'', include('social.apps.django_app.urls', namespace='social')),
+
 
 )
 

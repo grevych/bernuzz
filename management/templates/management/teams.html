@@ -3,13 +3,147 @@
 
 {% block content %}
 <div class="content" style="">
-    {% for team in group %}
-        <div class="square" >
-            <div style="position:absolute; top:4px; left:4px; right:4px; bottom:4px; overflow:hidden;">
-            <img  src="{{ team.logo }}"  style=" position:relative; width:100%;  ">
-            {{ team.name }}
+    <!-- overflow:scroll; -->
+    <div style="padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;">
+        
+        {% for team in  group %}
+        <div style="display:inline-block; text-align:center; padding:12px; float:left;">
+            <div class="shape square simple" style="margin-bottom:0;" >
+                <a class="preview" href=""
+                    data-id=""
+                    data-content='{"name": "{{team.name}}", "logo": "{{team.logo.url}}"}'>
+                    
+                    <div style=" overflow:hidden;">
+                        <img src="{{ team.logo.url }}"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </a>
+                <a class="link" href="{% url 'management:profile' account=team.name %}" style="display:none;">
+                    <div style="background:rgba(0, 0, 0, 0.4);">
+                    </div>
+                </a>
+            </div>
+            <div style="margin:0 8px 12px 8px;font-family:Open Sans; color:#343434; font-size:12px;">
+                <div>
+                    <i class="fa fa-w fa-user icon" style="float:left;"></i> 
+                    <div class="label">{{ team.name }} </div>
+                </div>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+
+
+        <div style="display:inline-block; text-align:center; padding:12px; float:left;">
+            <div class="shape square simple" style="margin-bottom:0; border:2px dashed #AEAEAE;" >
+                <a href="{% url 'hierarchy:team' account=request.user.username %}">
+                    <div class="square align" style=" overflow:hidden;">
+                        <i class="fa fa-w fa-plus" style="color:#AEAEAE;"></i>
+                        <!-- <img  src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  "> -->
+                        
+                    </div> 
+                </a>
+            </div>
+            <div style="margin:0 8px 12px 8px;font-family:Open Sans; color:#AEAEAE; font-size:12px;">
+                <div>
+                    <div class="label"> New Project </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="preview-container" style="width:25%; right:0; height:100%; display:inline-block; float:left; background:#FFF; position:fixed; display:none;" >
+        <div style="border-left:1px solid #F2F2F2; width:100%; height:100%; overflow-y:scroll; position:absolute; ">
+            <div style="padding:28px 24px 18px;">
+                <div class="shape square simple" style="width:60px; min-width:0; margin:0 10px 10px 0; vertical-align:top;" >
+                    <div style=" overflow:hidden;">
+                        <img  id="project-logo-preview" src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </div>
+                <div style="display:inline-block; vertical-align:top;">
+                    <div id="project-name-preview" style="font-family:Open Sans; font-size:14px; font-weight:400; color:#434343;">FileStory</div>
+                    <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343;">ITESM Campus Querétaro</div>
+                    <div style="font-family:Open Sans; font-size:12px; font-weight:300; color:#434343; background:#FDAD73; padding:1px 6px; display:inline-block; border-radius:2px;">Stand by</div>
+                </div>
+            </div>
+
+
+            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+                <div id="project-description-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">Focus on being creative, not organizing Files.</div>
+            
+            </div>
+
+            <div style="padding:2px 24px; border-top:1px solid #F2F2F2;">
+                <!-- <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; margin-top:12px;">Team</div> -->
+                <div style="">
+                    <div class="shape circle simple" style="width:40px; min-width:0; margin:8px 2px;" >
+                        <div>
+                            <img  src="{% static 'img/user.jpg' %}"  style=" position:relative; width:100%;  ">
+                        </div> 
+                    </div>  
+
+                </div>
+            </div>
+            
+
+            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">News</div>
+
+            </div>
+            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">Settings</div>
+            
+            </div>
+<!--         rol, permisos, icono, nombre, descripcion, miembros, tasks
+        agregar miembro, configuracion, editar
+
+        barra lateral durante tasks servira para mensajes y archivos, a que proceso pertenece, quien era el encargado, quien lo hizo, etc, evidencias, artefactos
+
+        ver si un proyecto a huevo necesita una entidad equipo o puede tener colaboradores estilo github
+
+        agregar filtro a procesos y tasks por equipo o por proyecto
+
+        en el aside de equipo que salgan las noticias de los equipos, mensajes, etc
+
+        aside -> mensajes, archivos, tasks, procesos, miembros(equipo), colaboradores (proyecto), versiones, timeline estilo github (noticias)
+
+        en fotos de miembros mandar a la url del rol del usuario o lo referente a el en el proyecto o equipo
+
+
+        documentos finales, pueden ser visibles (publicos o no :D ), artefactos o evidencias publicas o privadas -->
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+    
 </div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+    $('.preview').click(function(event) {
+        $('#preview-container').css('display', 'inline-block');
+        event.preventDefault();
+        $('.link').hide();
+        $(this).next('.link').show();
+        var project = $(this).data().content;
+        console.log(project);
+
+        $('#project-name-preview').text(project.name);
+        $('#project-description-preview').text(project.description);
+        $('#project-logo-preview').attr('src',  project.logo);
+        console.log($('#project-logo-preview').attr('src'));
+
+        return false;
+    });
+
+</script>
 {% endblock %}

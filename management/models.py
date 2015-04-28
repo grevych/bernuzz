@@ -13,8 +13,8 @@ class Project(models.Model):
     start_date = models.DateField('Start date', auto_now_add=True)
     end_date = models.DateField('Start date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
-    status = models.ForeignKey("ProjectStatus", verbose_name="Project Status")
-    privacy = models.ForeignKey("ProjectPrivacy", verbose_name="Project Privacy")
+    #status = models.ForeignKey("ProjectStatus", verbose_name="Project Status")
+    #privacy = models.ForeignKey("ProjectPrivacy", verbose_name="Project Privacy")
 
     class Meta:
         permissions = (
