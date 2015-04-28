@@ -93,9 +93,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-
-
 AUTHENTICATION_BACKENDS = (
     'social.backends.open_id.OpenIdAuth',
     'social.backends.google.GoogleOpenId',
@@ -107,8 +104,6 @@ AUTHENTICATION_BACKENDS = (
     #For username/password login
     'django.contrib.auth.backends.ModelBackend',
 )
-
-
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.backends',
@@ -127,9 +122,6 @@ SOCIAL_AUTH_USER_MODEL = 'foo.bar.User'
 
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-
-
-
 
 #Used to redirect the user once the auth process ended successfully. The value of ?next=/foo is used if it was present
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/logged-in/'
@@ -152,37 +144,9 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
 #Inactive users can be redirected to this URL when trying to authenticate.
 SOCIAL_AUTH_INACTIVE_USER_URL = '/inactive-user/'
 
-
-
 SOCIAL_AUTH_SANITIZE_REDIRECTS = True
 
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
 
 SOCIAL_AUTH_SESSION_EXPIRATION = False
 
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__),
-                 '..', 'templates').replace('\\', '/'),)
-
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
-MEDIA_ROOT = (os.path.join(os.path.dirname(__file__),
-              '..', 'media').replace('\\', '/'))
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = 'http://127.0.0.1:8000/media/'
-
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    'templates',
-)

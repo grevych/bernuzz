@@ -10,4 +10,6 @@ class User(models.Model):
     career = models.CharField('Career', max_length=50)
     active = models.BooleanField('Active', default=True)
 
+    def __unicode__(self):
+        return self.user.username
 

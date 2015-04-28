@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="content" style="">
+    {% for role in group %}
+        <div class="" >
+            {{ role.name }} in {{ role.team }}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

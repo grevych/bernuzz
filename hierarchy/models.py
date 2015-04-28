@@ -4,8 +4,8 @@ from django.db import models
 
 
 class Team(models.Model):
-    name = models.CharField('Team name', max_length=140)
-    logo = models.CharField('Team logo', max_length=140, blank=True)
+    name = models.CharField('Team name', max_length=140, unique=True)
+    logo = models.FileField(upload_to='teams/', null=True, blank=True)
     active = models.BooleanField('Active', default=True)
 
     class Meta:

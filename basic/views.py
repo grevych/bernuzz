@@ -6,8 +6,6 @@ from django.shortcuts import render
 from bernuzz.settings.private import SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
 
 
-
-
 def index(request):
     template_variables = {}
     if not request.user.is_authenticated():
@@ -19,11 +17,10 @@ def index(request):
 
 #if user.is_active():
 
+
 def login(request):
     if request.method ==  'POST':
         return HttpResponse('HOLA')
-
     template_variables = {}
     template_variables['plus_id'] = SOCIAL_AUTH_GOOGLE_PLUS_KEY
-
     return render(request, 'login_.html', template_variables)
