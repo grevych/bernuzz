@@ -13,6 +13,8 @@ class Project(models.Model):
     start_date = models.DateField('Start date', auto_now_add=True)
     end_date = models.DateField('Start date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
+    status = models.ForeignKey("ProjectStatus", verbose_name="Project Status")
+    privacy = models.ForeignKey("ProjectPrivacy", verbose_name="Project Privacy")
 
     class Meta:
         permissions = (
@@ -39,9 +41,8 @@ class ProjectUser(models.Model):
 
 
 class ProjectPrivacy(models.Model):
-    name = models.CharField('Project privacy', max_length=100)
-    project = models.ForeignKey('Project', verbose_name='Project')
-    active = models.BooleanField('Active', default=True)
+    name = models.CharField("Project Privacy", max_length=100)
+    active = models.BooleanField("Active", default=True)
 
     class Meta:
         permissions = (
@@ -54,7 +55,7 @@ class ProjectPrivacy(models.Model):
 
 class ProjectStatus(models.Model):
     name = models.CharField('Project status', max_length=140)
-    project = models.ForeignKey('Project', verbose_name='Project')
+    #project = models.ForeignKey('Project', verbose_name='Project')
     #date
     active = models.BooleanField('Active', default=True)
 
@@ -68,9 +69,10 @@ class ProjectStatus(models.Model):
 
 
 class CollegeProject(models.Model):
-    project = models.ForeignKey('Project', verbose_name='Project')
-    college = models.ForeignKey('College', verbose_name='College')
-    active = models.BooleanField('Active', default=True)
+    project = models.ForeignKey("Project", verbose_name="Project")
+    college = models.ForeignKey("College", verbose_name="College")
+    date = models.DateField("Added on", auto_now_add=True)
+    active = models.BooleanField("Active", default=True)
 
     class Meta:
         permissions = (
@@ -82,9 +84,10 @@ class CollegeProject(models.Model):
 
 
 class ProjectSkill(models.Model):
-    skill = models.ForeignKey('Skill', verbose_name='Skill')
-    project = models.ForeignKey('Project', verbose_name='Project')
-    active = models.BooleanField('Active', default=True)
+    skill = models.ForeignKey("Skill", verbose_name="Skill")
+    project = models.ForeignKey("Project", verbose_name="Project")
+    date = models.DateField("Added on", auto_now_add=True)
+    active = models.BooleanField("Active", default=True)
 
     class Meta:
         permissions = (
@@ -95,24 +98,10 @@ class ProjectSkill(models.Model):
         return '%s - %s' % (self.skill.name, self.project.name)
 
 
-class ProjectProcess(models.Model):
-    project = models.ForeignKey('Project', verbose_name='Project')
-    process = models.ForeignKey('workflow.Process', verbose_name='Process')
-    active = models.BooleanField('Active', default=True)
-
-    class Meta:
-        permissions = (
-
-        )
-
-    def __unicode__(self):
-        return '%s - %s' % (self.project.name, self.process.name)
-
-
 class Skill(models.Model):
-    name = models.CharField('Skill name', max_length=140)
-    description = models.CharField('Skill description', max_length=300)
-    active = models.BooleanField('Active', default=True)
+    name = models.CharField("Skill Name", max_length=140)
+    description = models.CharField("Skill Description", max_length=300)
+    active = models.BooleanField("Active", default=True)
 
     class Meta:
         permissions = (
@@ -124,10 +113,10 @@ class Skill(models.Model):
 
 
 class Announcement(models.Model):
-    subject = models.CharField('Subject', max_length=140)
-    message = models.CharField('Message', max_length=500)
-    date_time = models.DateTimeField('Announcement date', auto_now_add=True)
-    active = models.BooleanField('Active', default=True)
+    subject = models.CharField("Subject", max_length=140)
+    message = models.CharField("Message", max_length=500)
+    date_time = models.DateTimeField("Announcement Date", auto_now_add=True)
+    active = models.BooleanField("Active", default=True)
 
     class Meta:
         permissions = (

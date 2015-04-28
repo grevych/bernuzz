@@ -7,18 +7,17 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('workflow', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Announcement',
+            name='Announcements',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('subject', models.CharField(max_length=140, verbose_name=b'Subject')),
-                ('message', models.CharField(max_length=500, verbose_name=b'Message')),
-                ('date_time', models.DateTimeField(auto_now_add=True, verbose_name=b'Announcement date')),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('subject', models.CharField(max_length=140, verbose_name='Subject')),
+                ('message', models.CharField(max_length=500, verbose_name='Message')),
+                ('date_time', models.DateTimeField(verbose_name='Announcement Date', auto_now_add=True)),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
             ],
             options={
                 'permissions': (),
@@ -28,11 +27,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='College',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=140, verbose_name=b'Institution name')),
-                ('campus', models.CharField(max_length=140, verbose_name=b'Campus')),
-                ('city', models.CharField(max_length=140, verbose_name=b'City')),
-                ('state', models.CharField(max_length=140, verbose_name=b'State')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=140, verbose_name='Institution Name')),
+                ('campus', models.CharField(max_length=140, verbose_name='Campus')),
+                ('city', models.CharField(max_length=140, verbose_name='City')),
+                ('state', models.CharField(max_length=140, verbose_name='State')),
             ],
             options={
                 'permissions': (),
@@ -40,11 +39,11 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='CollegeProject',
+            name='CollegeProjects',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
-                ('college', models.ForeignKey(verbose_name=b'College', to='management.College')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
+                ('college', models.ForeignKey(verbose_name='College', to='management.College')),
             ],
             options={
                 'permissions': (),
@@ -54,14 +53,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Project',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=200, verbose_name=b'Project name')),
-                ('area', models.CharField(max_length=200, verbose_name=b'Area')),
-                ('logo', models.CharField(max_length=140, verbose_name=b'Project logo', blank=True)),
-                ('start_date', models.DateField(auto_now_add=True, verbose_name=b'Start date')),
-                ('end_date', models.DateField(null=True, verbose_name=b'Start date', blank=True)),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
-                ('parent_id', models.ForeignKey(verbose_name=b'Parent process', to='management.Project', null=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=200, verbose_name='Project Name')),
+                ('area', models.CharField(max_length=200, verbose_name='Area')),
+                ('logo', models.CharField(blank=True, max_length=140, verbose_name='Project Logo')),
+                ('start_date', models.DateField(verbose_name='Start Date', auto_now_add=True)),
+                ('end_date', models.DateField(blank=True, verbose_name='Start Date', null=True)),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
             ],
             options={
                 'permissions': (),
@@ -71,10 +69,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ProjectPrivacy',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=100, verbose_name=b'Project privacy')),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
-                ('project', models.ForeignKey(verbose_name=b'Project', to='management.Project')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=100, verbose_name='Project Privacy')),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
+                ('project', models.ForeignKey(verbose_name='Project', to='management.Project')),
             ],
             options={
                 'permissions': (),
@@ -82,24 +80,11 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='ProjectProcess',
+            name='ProjectSkills',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
-                ('process', models.ForeignKey(verbose_name=b'Process', to='workflow.Process')),
-                ('project', models.ForeignKey(verbose_name=b'Project', to='management.Project')),
-            ],
-            options={
-                'permissions': (),
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='ProjectSkill',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
-                ('project', models.ForeignKey(verbose_name=b'Project', to='management.Project')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
+                ('project', models.ForeignKey(verbose_name='Project', to='management.Project')),
             ],
             options={
                 'permissions': (),
@@ -109,10 +94,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ProjectStatus',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=140, verbose_name=b'Project status')),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
-                ('project', models.ForeignKey(verbose_name=b'Project', to='management.Project')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=140, verbose_name='Project Status')),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
+                ('project', models.ForeignKey(verbose_name='Project', to='management.Project')),
             ],
             options={
                 'permissions': (),
@@ -120,12 +105,12 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Skill',
+            name='Skills',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=140, verbose_name=b'Skill name')),
-                ('description', models.CharField(max_length=300, verbose_name=b'Skill description')),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=140, verbose_name='Skill Name')),
+                ('description', models.CharField(max_length=300, verbose_name='Skill Description')),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
             ],
             options={
                 'permissions': (),
@@ -133,15 +118,15 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.AddField(
-            model_name='projectskill',
+            model_name='projectskills',
             name='skill',
-            field=models.ForeignKey(verbose_name=b'Skill', to='management.Skill'),
+            field=models.ForeignKey(verbose_name='Skill', to='management.Skills'),
             preserve_default=True,
         ),
         migrations.AddField(
-            model_name='collegeproject',
+            model_name='collegeprojects',
             name='project',
-            field=models.ForeignKey(verbose_name=b'Project', to='management.Project'),
+            field=models.ForeignKey(verbose_name='Project', to='management.Project'),
             preserve_default=True,
         ),
     ]

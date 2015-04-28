@@ -9,6 +9,7 @@ from management.models import Project, ProjectPrivacy, ProjectSkill, \
     ProjectStatus, College, CollegeProject, Skill, Announcement, ProjectUser
 
 # Register your models here.
+
 admin.site.register(User)
 admin.site.register(Team)
 admin.site.register(TeamMember)

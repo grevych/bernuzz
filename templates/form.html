@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="content" style="">
+        {% if "update" in url_name %}
+            <form action="{% url url_name id %}" method="post" enctype="multipart/form-data">
+        {% else %}
+            <form action="{% url url_name %}" method="post" enctype="multipart/form-data">
+        {% endif %}
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+{% endblock %}

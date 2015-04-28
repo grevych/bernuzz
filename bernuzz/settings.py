@@ -37,6 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'basic',
+    'hierarchy',
+    'management',
+    'workflow',
     'social.apps.django_app.default',
     #'social.apps.django_app.me',
 )
@@ -61,8 +65,12 @@ WSGI_APPLICATION = 'bernuzz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bernuzz',
+        'USER': 'bernuzz',
+        'PASSWORD': 'devel',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -85,9 +93,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-
-
 AUTHENTICATION_BACKENDS = (
     'social.backends.open_id.OpenIdAuth',
     'social.backends.google.GoogleOpenId',
@@ -99,8 +104,6 @@ AUTHENTICATION_BACKENDS = (
     #For username/password login
     'django.contrib.auth.backends.ModelBackend',
 )
-
-
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.backends',
@@ -119,9 +122,6 @@ SOCIAL_AUTH_USER_MODEL = 'foo.bar.User'
 
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-
-
-
 
 #Used to redirect the user once the auth process ended successfully. The value of ?next=/foo is used if it was present
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/logged-in/'
@@ -143,8 +143,6 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
 
 #Inactive users can be redirected to this URL when trying to authenticate.
 SOCIAL_AUTH_INACTIVE_USER_URL = '/inactive-user/'
-
-
 
 SOCIAL_AUTH_SANITIZE_REDIRECTS = True
 

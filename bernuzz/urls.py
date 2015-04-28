@@ -13,19 +13,20 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('basic.urls', namespace='basic')),
-    # url(r'', include('hierarchy.urls', namespace='hierarchy')),
+    url(r'', include('hierarchy.urls', namespace='hierarchy')),
     url(r'', include('management.urls', namespace='management')),
     url(r'', include('workflow.urls', namespace='workflow')),
-#    url(r'^/$', '', name='dashboard'),
+    #url(r'^/$', '', name='dashboard'),
     # /explore name=explore -> app?
 
     url(r'', include('social.apps.django_app.urls', namespace='social')),
-    
 
-) 
+)
+
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT, show_indexes=True)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
+
 
 # /username
 # /username/project

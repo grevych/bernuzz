@@ -12,11 +12,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Role',
+            name='Roles',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=140, verbose_name=b'Role name')),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=140, verbose_name='Role name')),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
             ],
             options={
                 'permissions': (),
@@ -24,12 +24,10 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Team',
+            name='TeamMembers',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=140, verbose_name=b'Team name')),
-                ('logo', models.CharField(max_length=140, verbose_name=b'Team logo', blank=True)),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
             ],
             options={
                 'permissions': (),
@@ -37,12 +35,12 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='TeamMember',
+            name='Teams',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
-                ('team', models.ForeignKey(verbose_name=b'Team', to='hierarchy.Team')),
-                ('user', models.ForeignKey(verbose_name=b'User', to='basic.User')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=140, verbose_name='Team name')),
+                ('logo', models.CharField(blank=True, max_length=140, verbose_name='Team Logo')),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
             ],
             options={
                 'permissions': (),
@@ -50,9 +48,21 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.AddField(
-            model_name='role',
+            model_name='teammembers',
             name='team',
-            field=models.ForeignKey(verbose_name=b'Team', to='hierarchy.Team'),
+            field=models.ForeignKey(verbose_name='Team', to='hierarchy.Teams'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='teammembers',
+            name='user',
+            field=models.ForeignKey(verbose_name='User', to='basic.User'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='roles',
+            name='team',
+            field=models.ForeignKey(verbose_name='Team', to='hierarchy.Teams'),
             preserve_default=True,
         ),
     ]

@@ -17,6 +17,21 @@ class Process(models.Model):
         return self.name
 
 
+class ProjectProcess(models.Model):
+    project = models.ForeignKey("management.Project", verbose_name="Project")
+    process = models.ForeignKey("Process", verbose_name="Parent Process")
+    date = models.DateField("Added on", auto_now_add=True)
+    active = models.BooleanField("Active", default=True)
+
+    class Meta:
+        permissions = (
+
+        )
+
+    def __unicode__(self):
+        return "%s - %s" % (self.project.name, self.process.name)
+
+
 class Stage(models.Model):
     name = models.CharField('Stage name', max_length=100)
     description = models.CharField('Stage description', max_length=200)
@@ -25,6 +40,7 @@ class Stage(models.Model):
     start_time = models.DateTimeField('Start time', auto_now_add=True)
     end_time = models.DateTimeField('End date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
+    
     class Meta:
         permissions = (
 

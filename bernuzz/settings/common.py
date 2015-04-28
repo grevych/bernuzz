@@ -78,12 +78,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'media'),
-    
+
 )
 
 print os.path.join(BASE_DIR, 'static')
-
-
 
 
 AUTHENTICATION_BACKENDS = (
@@ -113,7 +111,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
     'django.contrib.messages.context_processors.messages',
-    
+
 )
 
 TEMPLATE_DIRS = (
