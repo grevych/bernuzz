@@ -4,17 +4,17 @@ from django.db import models
 
 
 class Project(models.Model):
-    name = models.CharField('Project name', max_length=200, unique=True)
+    name = models.CharField('Project name', max_length=200)
     description = models.CharField('Project description', max_length=600, blank=True)
     area = models.CharField('Area', max_length=200)
-    logo = models.CharField('Project logo', max_length=140, blank=True)
+    logo = models.FileField(upload_to='projects/images/', null=True, blank=True)
     parent_id = models.ForeignKey('Project', verbose_name='Parent project', null=True, blank=True)
-    team = models.ForeignKey('hierarchy.Team', verbose_name='Team', null=True, blank=True)
+    team = models.ForeignKey('hierarchy.Team', verbose_name='Team', null=True, blank=True, related_name="projects")
     start_date = models.DateField('Start date', auto_now_add=True)
     end_date = models.DateField('Start date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
     #status = models.ForeignKey("ProjectStatus", verbose_name="Project Status")
-    #privacy = models.ForeignKey("ProjectPrivacy", verbose_name="Project Privacy")
+    access_level = models.ForeignKey('AccessLevel', verbose_name="Access Level", null=True, blank=True)
 
     class Meta:
         permissions = (
@@ -40,8 +40,8 @@ class ProjectUser(models.Model):
         return '%d: %s -> %s' % (self.pk, self.project.name, self.user, )
 
 
-class ProjectPrivacy(models.Model):
-    name = models.CharField("Project Privacy", max_length=100)
+class AccessLevel(models.Model):
+    name = models.CharField("Access Level", max_length=100)
     active = models.BooleanField("Active", default=True)
 
     class Meta:
@@ -50,7 +50,7 @@ class ProjectPrivacy(models.Model):
         )
 
     def __unicode__(self):
-        return '%s - %s' % (self.project.name, self.name)
+        return '%s' % (self.name)
 
 
 class ProjectStatus(models.Model):

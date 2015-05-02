@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div class="content">
+    <!-- overflow:scroll; -->
+    <!-- padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;  -->
+    <div style="width:65%; height:100%;  display:inline-block; float:left;  padding:30px 0 0 30px;  ">
+
+        <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:28px;" >
+            <div style="border-bottom:1px solid #AEAEAE; padding:6px 0">
+                <h3> Create Project</h3>
+            </div>
+
+            {% block section %}
+            {% endblock %}
+
+
+        </div>
+    </div>    
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+
+
+</script>
+{% endblock %}

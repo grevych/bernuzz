@@ -1,4 +1,15 @@
 
+
+
+urls para usernames raros
+crear por default nuevo User en db
+sacar imagen de google para usuario
+parend_id de proyecto se debe llamar fork
+
+
+
+
+
 vista de proyectos en dashboard
 vista de equipos en dashboard
 

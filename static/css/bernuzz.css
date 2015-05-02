@@ -8,7 +8,6 @@ body {
 }
 
 .motto {
-    font-family:Open Sans;
     font-weight:200;
 }
 
@@ -45,9 +44,10 @@ body {
     box-shadow: 2px 2px 6px -2px #AEAEAE;
     /*box-shadow: 1px 1px 6px -2px #6A6A6A; */
     min-width: 84px;
-    max-width: 120px;
+    max-width: 160px;
     width: 10%;
-    border:1px solid #F2F2F2;
+
+    /*border:1px solid #F2F2F2;*/
     padding:4px; 
 }
 
@@ -82,13 +82,19 @@ body {
         margin:12px 8px;
     }
 
-    .square.align:before {
-        content: '';
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-        padding-top:0;
-    }
+.align:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+
+}
+
+.align > * {
+    display: inline-block;
+    vertical-align: middle;
+}
 
 
 .circle {
@@ -138,6 +144,21 @@ body {
       font-family: 'Roboto', sans-serif;
     }
 
+
+
+.logo {
+    text-align:center; 
+    font-family:Roboto Condensed; 
+    font-weight:400; 
+    font-size:20px; 
+    width:34px; 
+    height:34px; 
+    border-radius:2px; 
+    background:#323232; 
+    float:left; 
+    line-height:34px; 
+    color:#FFF;
+}
 
 
 

@@ -28,21 +28,13 @@ def render_team(request, teamname):
     return render(request, template, template_variables)
 
 
-def login(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-
-def default(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-
 def create_team(request):
     template = "form.html"
     template_variables = dict()
     form = TeamForm()
     template_variables['title'] = "Create Team"
     template_variables['form'] = form
-    template_variables['url_name'] = "management:create_team"
+    template_variables['url_name'] = "hierarchy:team"
     if request.method == 'POST':
         form = TeamForm(request.POST, request.FILES)
         if form.is_valid():
