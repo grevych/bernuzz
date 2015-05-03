@@ -18,15 +18,17 @@ def render_teams(request):
     return render(request, template, template_variables)
 
 
-def login(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+def render_team(request, teamname):
+    template = "management/team.html"
+    template_variables = dict()
+    team = Team.objects.all().filter(active=True, name=teamname)
+    # projects = Project.object.all().filter(active=True, )
+    template_variables['group'] = team
+    template_variables['title'] = "Team"
+    return render(request, template, template_variables)
 
 
-def default(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-
-def create_team(request, account):
+def create_team(request):
     template = "form.html"
     template_variables = dict()
     form = TeamForm()
@@ -34,7 +36,6 @@ def create_team(request, account):
     template_variables['form'] = form
     template_variables['url_name'] = "hierarchy:team"
     user = User.objects.get(pk=request.user.id)
-    print user
     if request.method == 'POST':
         form = TeamForm(request.POST, request.FILES)
         if form.is_valid():                

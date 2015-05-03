@@ -11,14 +11,17 @@
 # from django.contrib.auth import logout
 
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 
-from django.views.generic import ListView
+
+from django.views.generic import ListView, CreateView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 
-from models import Project, Skill
-from forms import SkillForm
+from hierarchy.models import Team, TeamMember
+from models import Project, Skill, ProjectUser
+from forms import SkillForm, ProjectForm
 
 # Create your views here.
 
@@ -28,14 +31,6 @@ class LoginRequiredMixin(object):
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view)
-
-
-def default(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-
-def profile(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
 
 
 def render_skills(request, teamname):
@@ -88,4 +83,69 @@ class ProjectList(LoginRequiredMixin, ListView):
         context['teams_projects'] = Project.objects.filter(team__in=user_teams).filter(active=True)
         print context['teams_projects']
         return context
+
+
+class ProjectCreate(LoginRequiredMixin, CreateView):
+    model = Project
+    form_class = ProjectForm
+    fields = ['name', 'description', 'logo', 'access_level']
+    template_name = 'management/project_create.html'
+
+    def form_valid(self, form):
+        self.success_url = reverse(
+            'management:project', 
+            kwargs={'project': form.cleaned_data.get('name')})
+        print self.success_url
+
+        response = super(ProjectCreate, self).form_valid(form)
+        self.complete(form)
+        return response
+
+    # def form_invalid(self, form, *args, **kwargs):
+    #     print super(ProjectCreate, self).form_invalid(form, *args, **kwargs)
+    #     return super(ProjectCreate, self).form_invalid(form, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(ProjectCreate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+    # def post(self, request, *args, **kwargs):
+    #     return super(ProjectCreate, self).post(request, *args, **kwargs)
+
+    def complete(self, form):
+        owner = form.cleaned_data.get("owner")
+        team_queryset = Team.objects.filter(name=owner)
+
+        project = self.object
+
+        if team_queryset.count():
+            project.team = team_queryset[0]
+            project.save()
+        else:
+            project_user = ProjectUser()
+            project_user.project = project
+            project_user.user = self.request.user.member
+            project_user.save()
+
+
+class ProjectDetail(LoginRequiredMixin, DetailView):
+    context_object_name = 'project'
+    model = Project
+    template_name = 'management/project_announcements.html'
+    slug_field = 'name'
+    slug_url_kwarg = 'project'
+    #anuncios por default
+
+    def get_context_data(self, **kwargs):
+        pass
+
+
+class ProjectSettingsList(LoginRequiredMixin, ListView):
+    pass
+
+
+
+
+
 
