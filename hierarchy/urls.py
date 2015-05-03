@@ -8,15 +8,12 @@ urlpatterns = patterns('',
 
     #user dashboard
     url(r'^teams/$', 'hierarchy.views.render_teams', name='teams'),
-
-    #creacion, edicion, etc de equipos
-    url(r'^(?P<account>[\w|-]+)/team/$', 'hierarchy.views.render_teams', name='team'),
-
-    #creacion, edicion, etc de miembros de equipo
-    url(r'^(?P<account>[\w|-]+)/member/$', 'hierarchy.views.render_team', name='team_member'),
+    #creacion, edicicreatec de equipos
+    url(r'^(?P<account>[\w|-]+)/team/$', 'hierarchy.views.create_team', name='team'),
+    url(r'^(?P<account>[\w|-]+)/member/$', 'hierarchy.views.assign_to_team', name='team_member'),
 
     #creacion, edicion, etc de roles de equipo
-    url(r'^(?P<account>[\w|-]+)/role/$', 'hierarchy.views.render_team', name='team_role'),
+    url(r'^(?P<account>[\w|-]+)/role/$', 'hierarchy.views.render_teams', name='team_role'),
 
     #url(r'^roles/$', 'hierarchy.views.render_roles', name='roles'),
     #url(r'^roles/new/$', 'hierarchy.views.create_role', name='create_role'),

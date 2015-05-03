@@ -22,6 +22,7 @@ from forms import SkillForm
 
 # Create your views here.
 
+
 class LoginRequiredMixin(object):
     @classmethod
     def as_view(cls, **initkwargs):

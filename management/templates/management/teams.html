@@ -6,18 +6,18 @@
     <!-- overflow:scroll; -->
     <div style="padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;">
         
-        {% for team in  group %}
+        {% for membership in  group %}
         <div style="display:inline-block; text-align:center; padding:12px; float:left;">
             <div class="shape square simple" style="margin-bottom:0;" >
                 <a class="preview" href=""
                     data-id=""
-                    data-content='{"name": "{{team.name}}", "logo": "{{team.logo.url}}"}'>
+                    data-content='{"name": "{{ membership.team.name}}", "logo": "{{membership.team.logo.url}}"}'>
                     
                     <div style=" overflow:hidden;">
-                        <img src="{{ team.logo.url }}"  style=" position:relative; width:100%;  ">
+                        <img src="{{ membership.team.logo.url }}"  style=" position:relative; width:100%;  ">
                     </div> 
                 </a>
-                <a class="link" href="{% url 'management:profile' account=team.name %}" style="display:none;">
+                <a class="link" href="{% url 'management:profile' account=membership.team.name %}" style="display:none;">
                     <div style="background:rgba(0, 0, 0, 0.4);">
                     </div>
                 </a>
@@ -25,7 +25,7 @@
             <div style="margin:0 8px 12px 8px;font-family:Open Sans; color:#343434; font-size:12px;">
                 <div>
                     <i class="fa fa-w fa-user icon" style="float:left;"></i> 
-                    <div class="label">{{ team.name }} </div>
+                    <div class="label">{{ membership.team.name }} </div>
                 </div>
             </div>
         </div>
