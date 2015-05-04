@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+{% block content %}
+<div class="content">
+    <!-- overflow:scroll; -->
+    <!-- padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;  -->
+    <div style="width:65%; height:100%;  display:inline-block; float:left;  padding:30px 0 0 30px;  ">
+
+    <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:28px;" >
+        <div style="border-bottom:1px solid #AEAEAE; padding:6px 0;">
+            <div class="shape square" style="margin:40px 20px  40px 20px; float:left;">
+                <div>
+                    <img src="/media/{{ team.logo }}"  style=" position:relative; width:100%;">
+                </div> 
+            </div>
+            <h3> Roles in {{ team }}</h3>
+        </div>
+        <div style="margin:10px; min-height:150px;">
+            {% for role in roles %}
+                {{ role }}
+                <br>
+            {% endfor %}
+        </div>
+        <form class="form-horizontal" action="" method="post" style="margin-top:20px;" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <!-- margin:12px 12px 5% 12px float:left;-->
+        <div class="form-group">
+            <ol>
+                {% for error in form.description.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+            </ol>
+            <div style=" font-size:14px; width:20%; vertical-align:middle; display:inline-block; margin:0 0 0 7.5%;">
+                <label  class="control-label" for="{{ form.name.id_for_label }}">Role: </label>
+                <div style="width:75%; display:inline-block; margin:0 0 0 7.5%;">
+                    <input class="form-control" name="{{ form.name.html_name }}" style="width:250px;">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit">Create Role</button>
+        </div>
+
+        </form>
+
+    </div>
+    </div>
+
+
+    
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();            
+            reader.onload = function (e) {
+                $('#upload_image_wrapper').removeClass('align');
+                $('#upload_image_wrapper').css('border', '0');
+                $('#upload_image').show();
+                $('#upload_image').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#upload_image_input").change(function(){
+        readURL(this);
+    });
+
+</script>
+{% endblock %}

@@ -11,7 +11,8 @@ from .models import Team, TeamMember, Role
 class TeamForm(ModelForm):
     class Meta:
         model = Team
-        exclude = ('active',)
+        exclude = ('active', )
+
 
 
 class TeamMemberForm(ModelForm):

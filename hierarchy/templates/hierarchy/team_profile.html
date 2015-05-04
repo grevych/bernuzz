@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+{% block content %}
+<div class="content">
+    <!-- overflow:scroll; -->
+    <!-- padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;  -->
+    <div style="width:65%; height:100%;  display:inline-block; float:left;  padding:30px 0 0 30px;  ">
+
+    <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:28px;" >
+        <div style="border-bottom:1px solid #AEAEAE; padding:6px 0">
+            <h3> Update Team</h3>
+        </div>
+
+        <form class="form-horizontal" action="" method="post" style="margin-top:20px;" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+        <!-- margin:12px 12px 5% 12px float:left;-->
+            <div class="form-group">
+                <div class ="shape square" style="vertical-align:middle; margin:0 0 0 2.5%;">
+                    <div id="upload_image_wrapper" class="" style="border:0px; overflow:hidden; ">
+                        <!-- <i class="fa fa-w fa-plus background-text" style="color:#AEAEAE;"></i> -->
+                        <img id="upload_image" src="/media/{{ form.logo.value }}"  style=" position:relative; width:100%;">
+                        <span style="font-size:12px; color:#AEAEAE;"> Add image </span>
+                        <label  for="upload_image_input" style="position:absolute; top:0; left:0; bottom:0; right:0; cursor:pointer;"></label>
+                        <input id="upload_image_input"type="file" name="{{ form.logo.html_name }}" style="display:none;">
+                    </div> 
+                    <!--         
+                    <div class="label" style="top:100%; height:20%; font-family:Open Sans;  font-size:12px;">
+                        New Team 
+                    </div> 
+                    -->
+                </div>
+
+                <div style=" font-size:14px; width:20%; vertical-align:middle; display:inline-block; margin:0 0 0 7.5%;">
+                    <ol>
+                    {% for error in form.name.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                    <label  class="control-label" for="id_owner">Owner: </label>
+                    <select class="form-control" name="owner">
+                            <option value="{{ user }}">{{ user }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                    <ol>
+                    {% for error in form.description.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                    <label  class="control-label" for="{{ form.name.id_for_label }}" style="width:15%;">Team name: </label>
+                    <div style="width:75%; display:inline-block; margin:0 0 0 7.5%;">
+                        <input class="form-control" name="{{ form.name.html_name }}" value="{{ form.name.value }}" maxlength="{{ form.name.field.max_length }}">
+                    </div>
+            </div>
+
+        <div class="form-group">
+            <button type="submit">Update</button>
+        </div>
+
+        <div style="border-bottom:1px solid #AEAEAE; padding:6px 0">
+            <h3>Add members</h3>
+        </div>
+            <div style=" font-size:14px; width:20%; vertical-align:middle; display:inline-block; margin:0 0 0 7.5%;">
+                <label  class="control-label" for="id_member">Members: </label>
+                <br>
+                {% for member in members %}
+                    {{ member.user }}
+                    <br>
+                {% endfor %}
+            </div>
+            <div style=" font-size:14px; width:20%; vertical-align:middle; display:inline-block; margin:0 0 0 7.5%;">
+                <label  class="control-label" for="id_team_member">User: </label>
+                <select class="form-control" name="team_member">
+                    {% for choice in users %}
+                        <option value="{{ choice }}">{{ choice }}</option>
+                    {% endfor%}
+                </select>
+            </div>
+            
+        <div class="form-group">
+            <button type="submit" name="add_member">Add to team</button>
+        </div>
+
+        </form>
+
+         <div style="border-bottom:1px solid #AEAEAE; padding:6px 0">
+            <h3>Projects:</h3>
+        </div>
+        <div>
+        {% for project in projects %}
+            {{ project }}
+            <br>
+        {% endfor %}
+        </div>
+
+    </div>
+    </div>
+
+
+    
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();            
+            reader.onload = function (e) {
+                $('#upload_image_wrapper').removeClass('align');
+                $('#upload_image_wrapper').css('border', '0');
+                $('#upload_image').show();
+                $('#upload_image').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#upload_image_input").change(function(){
+        readURL(this);
+    });
+
+</script>
+{% endblock %}

@@ -6,84 +6,62 @@
     <!-- overflow:scroll; -->
     <div style="padding:30px 0 0 30px; width:70%; height:100%;  display:inline-block; float:left;">
         
-        {% for team in  group %}
+        {% for membership in group %}
         <div class="shape square" style="margin:20px 20px  40px 20px; float:left;">
             <a class="preview" href=""
                 data-id=""
-                data-content='{"name": "{{team.name}}", "logo": "{{team.logo.url}}"}'>
+                data-content='{"name": "{{membership.team.name}}", "logo": "{{membership.team.logo.url}}"}'>
                 <div>
-                    <img src="{{ team.logo.url }}"  style=" position:relative; width:100%;">
+                    <img src="{{ membership.team.logo.url }}"  style=" position:relative; width:100%;">
                 </div> 
             </a>
-            <a class="link" href="{% url 'hierarchy:team' team=team.name %}" style="display:none;">
+            <a class="link" href="{% url 'hierarchy:team_profile' team=membership.team.name %}" style="display:none;">
                 <div style="background:rgba(0, 0, 0, 0.4);">
                 </div>
             </a>
 
             <div style="top:100%; height:40px; font-family:Open Sans; font-size:12px; margin-right:-10px; margin-left:-10px;">
-                <div class="label">{{ team.name }} </div>
+                <div class="label">{{ membership.team.name }} </div>
             </div>
         </div>
         {% endfor %}
 
-
-            <div class ="shape square" style="margin:20px 20px 40px 20px; float:left;">
-                <a href="{% url 'hierarchy:team' %}">
-                    <div class="align" style="border:2px dashed #AEAEAE; overflow:hidden; ">
-                        <i class="fa fa-w fa-plus" style="color:#AEAEAE;"></i>
-                        <!-- <img  src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  "> -->
-                        
-                    </div> 
-                </a>
-                <div class="label" style="top:100%; padding-left:8px; height:40px; font-family:Open Sans;  font-size:12px;">
-                    New Team
+        <div class ="shape square" style="margin:20px 20px 40px 20px; float:left;">
+            <a href="{% url 'hierarchy:team' %}">
+                <div class="align" style="border:2px dashed #AEAEAE; overflow:hidden; ">
+                    <i class="fa fa-w fa-plus" style="color:#AEAEAE;"></i>
+                    <!-- <img  src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  "> -->
                 </div> 
-            </div>
+            </a>
+            <div class="label" style="top:100%; padding-left:8px; height:40px; font-family:Open Sans;  font-size:12px;">
+                New Team
+            </div> 
+        </div>
     </div>
-
 
     <div id="preview-container" style="width:25%; right:0; height:100%; display:inline-block; float:left; background:#FFF; position:fixed; display:none;" >
         <div style="border-left:1px solid #F2F2F2; width:100%; height:100%; overflow-y:scroll; position:absolute; ">
             <div style="padding:28px 24px 18px;">
                 <div class="shape square simple" style="width:60px; min-width:0; margin:0 10px 10px 0; vertical-align:top;" >
                     <div style=" overflow:hidden;">
-                        <img  id="project-logo-preview" src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  ">
+                        <img  id="team-logo-preview" src="{% static 'img/project.png' %}"  style=" position:relative; width:100%;  ">
                     </div> 
                 </div>
                 <div style="display:inline-block; vertical-align:top;">
-                    <div id="project-name-preview" style="font-family:Open Sans; font-size:14px; font-weight:400; color:#434343;">FileStory</div>
+                    <div id="team-name-preview" style="font-family:Open Sans; font-size:14px; font-weight:400; color:#434343;">FileStory</div>
                     <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343;">ITESM Campus Querétaro</div>
-                    <div style="font-family:Open Sans; font-size:12px; font-weight:300; color:#434343; background:#FDAD73; padding:1px 6px; display:inline-block; border-radius:2px;">Stand by</div>
+                    <div style="font-family:Open Sans; font-size:12px; font-weight:300; color:#434343; background:#FDAD73; padding:1px 6px; display:inline-block; border-radius:2px;">
+                        Active
+                    </div>
                 </div>
             </div>
-
-
-            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
-                <div id="project-description-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">Focus on being creative, not organizing Files.</div>
-            
-            </div>
-
             <div style="padding:2px 24px; border-top:1px solid #F2F2F2;">
                 <!-- <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; margin-top:12px;">Team</div> -->
-                <div style="">
-                    <div class="shape circle simple" style="width:40px; min-width:0; margin:8px 2px;" >
-                        <div>
-                            <img  src="{% static 'img/user.jpg' %}"  style=" position:relative; width:100%;  ">
-                        </div> 
-                    </div>  
-
+                <div id="team-members-preview" style="">
+                    
                 </div>
-            </div>
-            
+            </div>            
 
-            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
-                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">News</div>
-
-            </div>
-            <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
-                <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">Settings</div>
-            
-            </div>
 <!--         rol, permisos, icono, nombre, descripcion, miembros, tasks
         agregar miembro, configuracion, editar
 
@@ -125,14 +103,20 @@
         event.preventDefault();
         $('.link').hide();
         $(this).next('.link').show();
-        var project = $(this).data().content;
-        console.log(project);
-
-        $('#project-name-preview').text(project.name);
-        $('#project-description-preview').text(project.description);
-        $('#project-logo-preview').attr('src',  project.logo);
-        console.log($('#project-logo-preview').attr('src'));
-
+        var team = $(this).data().content;
+        $('#team-name-preview').text(team.name);
+       // $('#project-description-preview').text(team.description);
+        $('#team-logo-preview').attr('src', team.logo);
+        var member_url = "/team/" + team.name  + "/members"
+        console.log($('#team-logo-preview').attr('src'));
+        $.ajax({
+            url: member_url,
+            type: "post",
+            success: function(response) {
+                console.log('success');
+                console.log(response);
+            }
+        })
         return false;
     });
 
