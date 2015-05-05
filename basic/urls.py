@@ -2,7 +2,7 @@
 
 from django.conf.urls import patterns, include, url
 
-from views import logout, index, AccountSettingsList
+from views import logout, index, AccountSettingsList, ExploreList
 
 
 urlpatterns = patterns('',
@@ -11,5 +11,8 @@ urlpatterns = patterns('',
 
     url(r'^settings/$', AccountSettingsList.as_view(), name='settings'),
     #url(r'^(?P<account>[\w|-]+)/settings/$', 'management.views.default', name='account_settings'),
+
+
+    url(r'^explore/$', ExploreList.as_view(), name='settings'),
 
 )

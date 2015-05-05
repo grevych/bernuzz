@@ -19,6 +19,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView, CreateView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 
+from basic.models import User
 from hierarchy.models import Team, TeamMember
 from models import Project, Skill, ProjectUser
 from forms import SkillForm, ProjectForm
@@ -134,10 +135,25 @@ class ProjectDetail(LoginRequiredMixin, DetailView):
     template_name = 'management/project_announcements.html'
     slug_field = 'name'
     slug_url_kwarg = 'project'
-    #anuncios por default
+    
+    # def get_context_data(self, **kwargs):
+    #     pass
 
-    def get_context_data(self, **kwargs):
-        pass
+    def get_queryset(self):
+        name = self.kwargs.get(self.slug_url_kwarg, None)
+        #slug_field = self.get_slug_field()
+        #queryset = queryset.filter(**{slug_field: slug})
+        project_queryset = self.request.user.member.projects.filter(project__active=True, project__name=name)
+
+        if project_queryset.count():
+            return Project.objects.filter(
+                active=True, 
+                users__user=User.objects.filter(
+                    user=self.request.user))
+        
+        return Project.objects.filter(
+            active=True, 
+            team__in=[team_member.team.pk for team_member in self.request.user.member.teams.all()])
 
 
 class ProjectSettingsList(LoginRequiredMixin, ListView):

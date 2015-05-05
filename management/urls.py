@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^project/(?P<project>[\w|-]+)/$', ProjectDetail.as_view(), name='project'),
     url(r'^projects/$', ProjectList.as_view(), name='projects'),
 
-    url(r'^project/(?P<project>[\w|-]+)/settings/$', ProjectSettingsList.as_view(), name='project_settings'), #ajax? PODRIA SER
+    url(r'^project/(?P<project>[\w|-]+)/settings/$', ProjectSettingsList.as_view(), name='settings'), #ajax? PODRIA SER
     #url(r'^(?P<account>[\w|-]+)/(?P<project>[\w|-]+)/settings/$', 'management.views.default', name='project_settings'),
 
 

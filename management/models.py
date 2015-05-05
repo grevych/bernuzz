@@ -84,8 +84,8 @@ class CollegeProject(models.Model):
 
 
 class ProjectSkill(models.Model):
-    skill = models.ForeignKey("Skill", verbose_name="Skill")
-    project = models.ForeignKey("Project", verbose_name="Project")
+    skill = models.ForeignKey("Skill", verbose_name="Skill", related_name='projects')
+    project = models.ForeignKey("Project", verbose_name="Project", related_name='skills')
     date = models.DateField("Added on", auto_now_add=True)
     active = models.BooleanField("Active", default=True)
 

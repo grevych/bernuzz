@@ -1,0 +1,75 @@
+{% extends 'management/project_dashboard.html' %}
+{% load staticfiles %}
+
+
+{% block section %}
+<div style="margin-top:20px; font-size:12px;">
+    <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:28px;" >
+        <div style="border-bottom:1px solid #AEAEAE; padding:6px 0">
+            <h3> Create Process </h3>
+        </div>
+
+        <form class="form-horizontal" action="" method="post" style="margin-top:20px;" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+        <!-- margin:12px 12px 5% 12px float:left;-->
+            <div class="form-group">
+                <ol>
+                {% for error in form.name.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+                </ol>
+                <label  class="control-label" for="{{ form.name.id_for_label }}" style="width:15%;">Name</label>
+                <div style="width:75%; display:inline-block; margin:0 0 0 7.5%;">
+                    <input class="form-control" name="{{ form.name.html_name }}" maxlength="{{ form.name.field.max_length }}">
+                </div>
+            </div>
+            <div class="form-group">
+                    <ol>
+                    {% for error in form.description.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                    <label  class="control-label" for="{{ form.description.id_for_label }}" style="width:15%;">Description</label>
+                    <div style="width:75%; display:inline-block; margin:0 0 0 7.5%;">
+                        <input class="form-control" name="{{ form.description.html_name }}" maxlength="{{ form.description.field.max_length }}">
+                    </div>
+            </div>
+            <div class="form-group">
+                    <ol>
+                    {% for error in form.parent_id.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                    <label  class="control-label" for="{{ form.parent_id.id_for_label }}" style="width:15%;">Parent process</label>
+                    <div style="width:35%; display:inline-block; margin:0 0 0 7.5%;">
+
+                    <select class="form-control" name="{{ form.parent_id.html_name }}">
+                        {% for choice in form.parent_id.field.choices %}
+                        <option value="{{choice.0}}">{{choice.1}}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+            </div> 
+
+            <div class="form-group">
+                <button>Create</button>
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+
+
+{% block extra_scripts %}
+<script>
+
+</script>
+{% endblock %}

@@ -6,7 +6,7 @@ from django.db import models
 class Process(models.Model):
     name = models.CharField('Process name', max_length=140)
     description = models.CharField('Description', max_length=300)
-    parent_id = models.ForeignKey('Process', verbose_name='Parent process', null=True)
+    parent_id = models.ForeignKey('Process', verbose_name='Parent process', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
 
     class Meta:
@@ -18,8 +18,8 @@ class Process(models.Model):
 
 
 class ProjectProcess(models.Model):
-    project = models.ForeignKey("management.Project", verbose_name="Project")
-    process = models.ForeignKey("Process", verbose_name="Parent Process")
+    project = models.ForeignKey("management.Project", verbose_name="Project", related_name='processes')
+    process = models.ForeignKey("Process", verbose_name="Parent Process", related_name='projects')
     date = models.DateField("Added on", auto_now_add=True)
     active = models.BooleanField("Active", default=True)
 
@@ -36,7 +36,7 @@ class Stage(models.Model):
     name = models.CharField('Stage name', max_length=100)
     description = models.CharField('Stage description', max_length=200)
     responsible = models.IntegerField('Responsible')
-    process = models.ForeignKey('Process', verbose_name='Process')
+    process = models.ForeignKey('Process', verbose_name='Process', related_name='stages')
     start_time = models.DateTimeField('Start time', auto_now_add=True)
     end_time = models.DateTimeField('End date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
@@ -53,8 +53,9 @@ class Stage(models.Model):
 class Task(models.Model):
     description = models.CharField('Task', max_length=300)
     responsible = models.IntegerField('Responsible')
+    completed = models.BooleanField('Completed', default=False)
     completed_by = models.IntegerField('Completed by')
-    stage = models.ForeignKey('Stage', verbose_name='Stage')
+    stage = models.ForeignKey('Stage', verbose_name='Stage', related_name='tasks')
     start_time = models.DateTimeField('Start time', auto_now_add=True)
     end_time = models.DateTimeField('End date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)

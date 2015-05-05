@@ -1,0 +1,214 @@
+{% extends 'management/project_dashboard.html' %}
+{% load staticfiles %}
+
+
+
+{% block section %}
+<style type="text/css">
+    
+    .process:hover {
+        background:#F2F2F2 !important;
+    }
+
+    .stage:hover {
+        background:#F2F2F2 !important;
+    }
+</style>
+
+<div style="margin-top:20px; font-size:12px;">
+
+    {% for workflow in workflows %}
+    <div  style="overflow:hidden;  position:relative; cursor:pointer; border:1px solid #F2F2F2; border-bottom:1px solid transparent; background:#FFF;">
+        <div class="process" style=" padding:4px 12px;">
+            <div class="shape square" style="width:28px; min-width:0; vertical-align:middle; box-shadow:0 0 0; border:1px solid #F2F2F2;">
+                <div>
+                    <img src="{% static 'img/user.jpg' %}" style="width:100%; ">
+                </div>
+            </div>
+            <div style="display:inline-block; margin-left:8px; line-height:40px; vertical-align:middle;" >
+                <a href="{% url 'workflow:workflow' project=project.name workflow=workflow.pk %}"><span>{{ workflow.name }}</span></a>
+            </div>
+            <div style="margin-left:16px; display:inline-block; color:#A3A3A3; line-height:40px; vertical-align:middle; font-size:11px;">
+                <span> {{ workflow.description }}</span>
+            </div>
+            <div style="display:inline-block; float:right; line-height:40px;">
+                <span style="padding:18px 10px;"><i class="fa fa-fw fa-level-down"></i></span>
+                <span style="padding:18px 10px;"><i class="fa fa-fw fa-street-view"></i></span>
+            </div>
+        </div>
+
+        {% for stage in workflow.stages.all %}
+        <!-- {"description": "{{task.description}}", "completed": "{{task.completed}}", "start_date": "{{task.start_date}}", "end_date":"{{task.end_date}}" }, -->
+        <div class="stage" style=" padding:4px 12px 4px 48px; display:none;" 
+            data-content='{"name": "{{stage.name}}", "description": "{{stage.description}}", "pk": "{{stage.pk}}", "process": {"name": "{{workflow.name}}", "description": "{{workflow.description}}"},  "tasks": [{% for task in stage.tasks.all %}{"id": "{{task.pk}}", "description": "{{task.description}}", "completed": "{{task.completed}}", "start_date": "{{task.start_date}}", "end_date":"{{task.end_date}}" },{% endfor %} null] }'>
+            <div class="shape circle simple" style="width:20px; height:20px; overflow:hidden; min-width:0; vertical-align:middle; box-shadow:0 0 0; border:1px solid #F2F2F2;">
+                <div>
+                    <img src="{% static 'img/user.jpg' %}" style="width:100%; ">
+                </div>
+            </div>
+            <div style="display:inline-block; margin-left:8px; line-height:40px; vertical-align:middle;" >
+                <span>{{ stage.name }}</span>
+            </div>
+            <div style="margin-left:16px; display:inline-block; color:#A3A3A3; line-height:40px; vertical-align:middle; font-size:11px;">
+                <span> {{ stage.description }} </span>
+            </div>
+            <div style="display:inline-block; float:right; color:#A3A3A3; line-height:40px; vertical-align:middle; font-size:11px;">
+                <span style="padding:18px 10px;"> {{ stage.tasks.count }} tasks</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+{% block sidebar %}
+<div id="preview-container" style="width:30%; border-left:1px solid #F2F2F2; border-right:1px solid #F2F2F2; right:15px; height:100%; display:inline-block; float:left; background:#FFF; position:fixed;">
+    <div style=" width:100%; height:100%; overflow-y:scroll; position:absolute; ">
+        <div style="padding:28px 24px 18px;">
+            <div class="shape square simple" style="width:60px; min-width:0; margin:0 10px 10px 0; vertical-align:top;" >
+                <div style=" overflow:hidden;">
+                    <img  id="project-logo-preview" src="{% static 'img/user.jpg' %}"  style=" position:relative; width:100%;  ">
+                </div> 
+            </div>
+            <div style="display:inline-block; vertical-align:top; width:75%;">
+                <div id="stage-name-preview" style="font-family:Open Sans; font-size:14px; font-weight:400; color:#434343;">Stage</div>
+                <div id="stage-description-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343;">Description</div>
+                <div style="font-family:Open Sans; font-size:12px; font-weight:300; color:#434343; background:#FDAD73; padding:1px 6px; display:inline-block; border-radius:2px;">Status</div>
+            </div>
+        </div>
+
+
+        <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+            <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">Tasks</div>
+            <div class="tasks" style="margin-top:12px; position:relative;">
+                <div class="task base" style="border-bottom:1px solid #F2F2F2; line-height:34px;">
+                    <input class="task-completed" name="completed" type="checkbox" disabled="disabled">
+                    <input class="task-description" name="description" type="text" style="width:100%; position:absolute; font-weight:300; font-size:14px;  border:0; padding:0 12px;" placeholder="+ Add a task">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+
+    function addTask(event) {
+        if(event.which === 13 &&  $(this).val().trim()){
+            var task = $(this).parent('.task.base').clone(),
+                tasks = $(this).parents('.tasks'),
+                input = $(this);
+            console.log(task);
+            $.ajax({
+                method: 'GET',
+                url: '{% url 'workflow:task' project=project.name %}',
+                data: {
+                    stage: event.data.pk,
+                    description: $(this).val()
+                },
+                success: function() {
+                    task.removeClass('base');
+                    task.addClass('clone')
+                    tasks.append(task);
+                    task.children('input').prop('disabled', false);
+                }
+            });
+
+            $(this).val('');
+            return false;
+        }
+
+    }
+
+    function updateTask(event) {
+        if(event.which === 13 &&  $(this).val().trim()){
+            var task = event.data.stage.tasks[event.data.task].id;
+            $.ajax({
+                method: 'post',
+                url:  "{% url 'workflow:task' project=project.name %}" + task,
+                data: event.data.stage,
+                success: function() {
+
+                }
+            });
+        }
+
+    }
+
+    function checkTask(event) {
+        var task = event.data.stage.tasks[event.data.task].id;
+        var input  = $(this);
+        $.ajax({
+            method: 'post',
+            url:  "{% url 'workflow:task' project=project.name %}" + task,
+            data: event.data.stage,
+            success: function() {
+
+            }
+        });
+        input.next('input').css('text-decoration', 'line-through');
+    }
+
+    $('.process').on('click', function() {
+        $('.process').css({'background': '#FFF'})
+        $('.stage').hide();
+        $(this).css({'background': 'rgb(255, 199, 199)'});
+        $(this).nextAll('.stage').toggle();
+
+        $('#stage-name-preview').text('Stage');
+        $('#stage-description-preview').text('Stage description');
+        $('.task.clone').remove();
+        $('.task.base').unbind();
+         
+    });
+
+    $('.stage').on('click', function() {
+        //$('#preview-container').css('display', 'inline-block');
+        var 
+            stage = $(this).data().content,
+            base = $('.task.base');
+        
+        console.log(stage);
+
+        $('#stage-name-preview').text(stage.name);
+        $('#stage-description-preview').text(stage.description);
+        $('.task.clone').remove();
+
+        base.children('.task-description').unbind();
+        base.children('.task-description').on('keydown', stage, addTask);
+
+        $.each(stage.tasks, function(index, element) {
+            var 
+                task = base.clone(),
+                completed = task.children('.task-completed'),
+                description = task.children('.task-description');
+
+            description.val(element.description);
+
+
+            if (element.completed == 'True') {
+                completed.prop('checked', true);
+                description.css('text-decoration', 'line-through');
+            }
+
+            description.on('keydown', {stage:stage, task: index}, updateTask);
+            completed.show();
+            completed.prop('disabled', false);
+            completed.on('change', {stage:stage, task: index}, checkTask);
+            task.removeClass('base');
+            task.addClass('clone');
+            $('.tasks').append(task);
+        });
+
+
+    });
+
+
+
+
+</script>
+{% endblock %}

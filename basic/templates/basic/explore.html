@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load list %}
+
+
+{% block content %}
+<div class="content">
+    <!-- overflow:scroll; -->
+    <!-- padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;  -->
+    <div style="width:25%; height:100%;  display:inline-block; float:left;  padding:30px 0 0 30px;  ">
+        <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:12px 24px;" >
+            <div style="border-bottom:1px solid #AEAEAE; padding:6px 0">
+                <h3> Select your skills </h3>
+            </div>
+            <form method="GET">
+                <div class="form-group">
+                    <span>Just selected skills will be analyzed</span>
+                </div>
+                {% for skill in skills %}
+                <div  style="line-height:28px; margin:12px 12px 12px 24px; font-size:14px; font-family:Open Sans; font-weight:300;">
+                    <input class="skill" value="{{ skill.pk }}" name="skills[]" type="checkbox">
+                    <span style="padding-left:12px;"> {{ skill.name }} </span>
+                </div>
+                {% endfor %}
+                <div class="form-group">
+                    <button style="cursor:pointer; border-radius:4px; background:#EA8282; padding:12px; border:1px solid #F2F2F2">Get similar profiles</button>
+                </div>  
+            </form>
+        </div>
+    </div>    
+    <div style="width:70%; height:100%;  display:inline-block; float:left;  padding:30px 0 0 30px;">
+        <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:12px 24px;">
+            <h3> Cluster </h3> 
+            <div style="font-size:12px; display:inline-block; vertical-align:top; margin-top:20px;">
+                {% for skill in all_skills %}
+                    <span style="padding:2px 6px; background:#6D8294; border-radius:2px 0 0 2px; margin:0 0 6px; float:left;">{{cluster.center|index:skill.pk}}</span>
+                    <span style="padding:2px 6px; background:#7CA7C7; border-radius:0 2px 2px 0; margin:0 6px 0 0; float:left;">{{skill.name}}</span>
+                {% endfor %}
+            </div>
+            <div style="font-size:12px; display:inline-block; vertical-align:top; margin-top:20px;">
+                <span style="padding:2px 6px; background:#6D8294; border-radius:2px 0 0 2px; margin:0 0 6px; float:left;">Delta:</span>
+                <span style="padding:2px 6px; background:#7CA7C7; border-radius:0 2px 2px 0; margin:0 6px 0 0; float:left;">{{ cluster.delta }}</span>
+            </div>
+        </div>
+        {% for element in cluster.set %}
+        <div style="margin-top:10px; padding:10px 20px; position:relative;">
+            <div class="shape square" style="min-width:0; width:60px; vertical-align:middle;">
+                <a class="preview" href="">
+                    <div style=" overflow:hidden;">
+                        <img src="{% static 'img/user.jpg' %}"  style=" position:relative; width:100%;  ">
+                    </div> 
+                </a>
+            </div>
+            <div style=" background:#FFF; font-weight:300; font-size:14px; border:1px solid #F2F2F2; border-radius:4px; padding:12px 24px; margin-left:10px; vertical-align:middle; display:inline-block; position:absolute; right:0; left:80px;">
+                <div style="display:inline-block; vertical-align:top;">
+                    <div style="font-weight:400;">{{element.id.user.first_name}} {{element.id.user.last_name}}</div>
+                    <div>{{element.id.user.username}}</div>
+                </div>
+                <div style="font-size:12px; display:inline-block; vertical-align:top; margin-left:20px;">
+                    {% for skill in all_skills %}
+                        {% if element.values|index_to_int:skill.pk != 0 %}
+                        <span style="padding:2px 6px; background:#6D8294; border-radius:2px 0 0 2px; margin:0 0 6px; float:left;">{{element.values|index_to_int:skill.pk}}</span>
+                        <span style="padding:2px 6px; background:#7CA7C7; border-radius:0 2px 2px 0; margin:0 6px 0 0; float:left;">{{skill.name}}</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+        {% endfor %}
+    </div>
+
+    {% block sidebar %}
+    {% endblock %}
+    
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+
+
+</script>
+{% endblock %}

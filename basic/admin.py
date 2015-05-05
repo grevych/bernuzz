@@ -4,8 +4,8 @@ from django.contrib import admin
 from basic.models import User
 from hierarchy.models import Team, TeamMember, Role
 from workflow.models import Process, Task, Stage, TaskMessage, \
-    StageMessage
-from management.models import Project, AccessLevel, ProjectSkill, \
+    StageMessage, ProjectProcess
+from management.models import Project, AccessLevel, ProjectSkill,  \
     ProjectStatus, College, CollegeProject, Skill, Announcement, ProjectUser
 
 # Register your models here.
@@ -23,6 +23,7 @@ admin.site.register(StageMessage)
 admin.site.register(Project)
 admin.site.register(AccessLevel)
 admin.site.register(ProjectSkill)
+admin.site.register(ProjectProcess)
 admin.site.register(ProjectStatus)
 admin.site.register(College)
 admin.site.register(CollegeProject)
