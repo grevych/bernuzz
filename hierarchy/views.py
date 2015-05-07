@@ -153,19 +153,34 @@ def settings(request, team):
     team = Team.objects.get(name=team)
     template_variables['team'] = team
     template_variables['roles'] = Role.objects.all().filter(active=True, team=team)
-    template_variables['form'] = form
+    team_form = TeamForm(instance=team)
+    template_variables['team_form'] = team_form
     if request.method == 'POST':
-        form = RoleForm(request.POST)
-        if form.is_valid():
-            new_form = form.save(commit=False)
-            new_form.team = team
-            new_form.save()
-            url = '/team/' + team.name + '/settings'
-            return HttpResponseRedirect(url)
-        else:
-            form_error = form
-            template_variables['form'] = form_error
-            return render(request, template, template_variables)
+        if 'update' in request.POST:
+            print "TEAM FORM"
+            team = Team.objects.get(name=team)
+            team_form = TeamForm(request.POST, request.FILES, instance=team)
+            if team_form.is_valid():
+                team = team_form.save()
+                url = '/team/' + team.name + '/settings'
+                return HttpResponseRedirect(url)
+            else:
+                form_error = team_form
+                template_variables['team_form'] = form_error
+                return render(request, template, template_variables)
+        elif 'new_role' in request.POST:
+            print "ROLES FORM"          
+            form = RoleForm(request.POST)
+            if form.is_valid():
+                new_form = form.save(commit=False)
+                new_form.team = team
+                new_form.save()
+                url = '/team/' + team.name + '/settings'
+                return HttpResponseRedirect(url)
+            else:
+                form_error = form
+                template_variables['form'] = form_error
+                return render(request, template, template_variables)
     return render(request, template, template_variables)
 
 

@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'hierarchy/team_dashboard.html' %}
 {% load staticfiles %}
 
 
 
-{% block content %}
+{% block section %}
 <style type="text/css">
     
     .role:hover {
@@ -13,18 +13,67 @@
 
 </style>
 
-<div class="content">
+<div >
     <!-- overflow:scroll; -->
     <!-- padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;  -->
-    <div style="width:65%; height:100%;  display:inline-block; float:left;  padding:30px 0 0 30px;  ">
+    <div style="width:100%; height:100%;  display:inline-block; float:left;  padding:30px 0 0 0;  ">
 
     <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:28px;" >
         <div style="border-bottom:1px solid #AEAEAE; padding:6px 0;">
-            <div class="shape square" style="margin:40px 20px  40px 20px; float:left;">
-                <div>
-                    <img src="/media/{{ team.logo }}"  style=" position:relative; width:100%;">
-                </div> 
+            <h3> Update {{ team }}</h3>
+        </div>
+        <form class="form-horizontal" action="" method="post" style="margin-top:20px;" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ team_form.non_field_errors }}
+        <!-- margin:12px 12px 5% 12px float:left;-->
+            <div class="form-group">
+                <div class ="shape square" style="vertical-align:middle; margin:0 0 0 2.5%;">
+                    <div id="upload_image_wrapper" class="" style="border:0px; overflow:hidden; ">
+                        <!-- <i class="fa fa-w fa-plus background-text" style="color:#AEAEAE;"></i> -->
+                        <img id="upload_image" src="/media/{{ team_form.logo.value }}"  style=" position:relative; width:100%;">
+                        <span style="font-size:12px; color:#AEAEAE;"> Add image </span>
+                        <label  for="upload_image_input" style="position:absolute; top:0; left:0; bottom:0; right:0; cursor:pointer;"></label>
+                        <input id="upload_image_input"type="file" name="{{ team_form.logo.html_name }}" style="display:none;">
+                    </div> 
+                    <!--         
+                    <div class="label" style="top:100%; height:20%; font-family:Open Sans;  font-size:12px;">
+                        New Team 
+                    </div> 
+                    -->
+                </div>
+
+                <div style=" font-size:14px; width:20%; vertical-align:middle; display:inline-block; margin:0 0 0 7.5%;">
+                    <ol>
+                    {% for error in team_form.owner.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                    <label  class="control-label" for="id_owner">Owner: </label>
+                    <select class="form-control" name="owner">
+                            <option value="{{ user }}">{{ user }}</option>
+                    </select>
+                </div>
             </div>
+
+            <div class="form-group">
+                    <ol>
+                    {% for error in form.description.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                    <label  class="control-label" for="{{ team_form.name.id_for_label }}" style="width:15%;">Team name: </label>
+                    <div style="width:75%; display:inline-block; margin:0 0 0 7.5%;">
+                        <input class="form-control" name="{{ team_form.name.html_name }}" value="{{ team_form.name.value }}" maxlength="{{ team_form.name.field.max_length }}">
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" name="update">Update</button>
+            </div>
+        </form>
+
+        <div style="border-bottom:1px solid #AEAEAE; padding:6px 0;">
             <h3> Roles in {{ team }}</h3>
         </div>
         <div style="margin:10px; min-height:150px;">
@@ -59,7 +108,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit">Create Role</button>
+            <button type="submit" name="new_role">Create Role</button>
         </div>
 
         </form>
