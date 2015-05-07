@@ -4,6 +4,15 @@
 
 
 {% block content %}
+<style type="text/css">
+    
+    .role:hover {
+        background:#F2F2F2 !important;
+    }
+
+
+</style>
+
 <div class="content">
     <!-- overflow:scroll; -->
     <!-- padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;  -->
@@ -20,8 +29,16 @@
         </div>
         <div style="margin:10px; min-height:150px;">
             {% for role in roles %}
-                {{ role }}
-                <br>
+                <div  style="overflow:hidden;  position:relative; cursor:pointer; border:1px solid #F2F2F2; border-bottom:1px solid transparent; background:#FFF;">
+                    <div class="role" style=" padding:4px 12px;">
+                        <div style="margin-left:16px; display:inline-block; color:#A3A3A3; line-height:40px; vertical-align:middle; font-size:11px;">
+                            <span> {{ role.name }}</span>
+                        </div>
+                        <div style="display:inline-block; float:right; line-height:40px;">
+                            <span style="padding:18px 10px;"><i class="fa fa-fw fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
         </div>
         <form class="form-horizontal" action="" method="post" style="margin-top:20px;" enctype="multipart/form-data">

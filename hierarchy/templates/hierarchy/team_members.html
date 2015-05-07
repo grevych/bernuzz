@@ -15,6 +15,43 @@
 
 <div style="margin-top:20px; font-size:12px;">
 
+    <form class="form-horizontal" action="{% url 'hierarchy:add_team_members' team=team.name %}" method="post" style="margin-top:20px;" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+        <div style="border-bottom:1px solid #AEAEAE; padding:6px 0">
+                <h3>Add members</h3>
+        </div> 
+        <div class="form-group">
+            <ol>
+            {% for error in form.user.errors %}
+                <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+            </ol>
+            <label  class="control-label" for="{{ form.user.id_for_label }}" style="width:15%;">Username: </label>
+            <div style="width:75%; display:inline-block; margin:0 0 0 7.5%;">
+                <input class="form-control" name="{{ form.user.html_name }}" maxlength="{{ form.user.field.max_length }}">
+            </div>
+        </div>  
+        <div style=" font-size:14px; width:20%; vertical-align:middle; display:inline-block; margin:0 0 0 7.5%;">
+            <ol>
+            {% for error in form.role.errors %}
+                <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+            </ol>
+            <label  class="control-label" for="{{ form.role.id_for_label }}">Role: </label>
+            <select class="form-control" name="{{ form.role.html_name }}">
+                {% for choice in form.role.field.choices %}
+                    <option value="{{ choice.0 }}"> {{ choice.1 }}</option>
+                {% endfor%}
+            </select>
+        </div>               
+        <div class="form-group">
+            <button type="submit" name="add_member">Add to team</button>
+        </div>
+
+    </form>
+
     {% for member in members %}
     <div  style="overflow:hidden;  position:relative; cursor:pointer; border:1px solid #F2F2F2; border-bottom:1px solid transparent; background:#FFF;">
         <div class="member" style=" padding:4px 12px;">
