@@ -5,8 +5,19 @@ from .models import Team, Role, TeamMember
 from management.models import Project
 from .forms import TeamForm, TeamMemberForm, RoleForm
 from basic.models import User
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.views.generic import ListView, CreateView, DetailView
+from django.utils.translation import ugettext as _
+
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)
 
 
 def delete(model):
@@ -162,3 +173,92 @@ def update_role(request, id_role):
             return render(request, template, template_variables)
     return render(request, template, template_variables)
 
+
+class TeamDetail(LoginRequiredMixin, DetailView):
+    context_object_name = 'team'
+    model = Team
+    template_name = 'hierarchy/team_announcements.html'
+    slug_field = 'name'
+    slug_url_kwarg = 'team'
+    
+    # def get_context_data(self, **kwargs):
+    #     pass
+
+    def get_queryset(self):
+        name = self.kwargs.get(self.slug_url_kwarg, None)
+        return Team.objects.filter(
+            active=True, 
+            name=name,
+            users__user=User.objects.filter(
+                user=self.request.user))
+
+
+class ProjectList(LoginRequiredMixin, ListView):
+    #paginate_by = 50
+    context_object_name = 'projects'
+    template_name = "hierarchy/team_projects.html"
+    team_name = None
+
+    def get(self, request, *args, **kwargs):
+        name = kwargs.get('team', None)
+        team_queryset = Team.objects.filter(
+                active=True, 
+                name=name,
+                users__user=User.objects.filter(
+                    user=self.request.user))
+
+        if not team_queryset.count():
+            raise Http404(_("Team %(name)s not found for this account.")
+                    % {'name': name})
+
+        self.team = team_queryset.get()
+        return super(ProjectList, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Project.objects.filter(
+            active=True, 
+            team=self.team)
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectList, self).get_context_data(**kwargs)
+        #user_teams = [team_member.team.pk for team_member in self.request.user.member.teams.all()]
+        context['team'] = self.team
+        print context
+        return context
+
+
+class MemberList(LoginRequiredMixin, ListView):
+    #paginate_by = 50
+    context_object_name = 'members'
+    template_name = "hierarchy/team_members.html"
+    team_name = None
+
+    def get(self, request, *args, **kwargs):
+        name = kwargs.get('team', None)
+        team_queryset = Team.objects.filter(
+                active=True, 
+                name=name,
+                users__user=User.objects.filter(
+                    user=self.request.user))
+
+        if not team_queryset.count():
+            raise Http404(_("Team %(name)s not found for this account.")
+                    % {'name': name})
+
+        self.team = team_queryset.get()
+        return super(MemberList, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        print 'hola', User.objects.filter(
+            active=True, 
+            teams__team=self.team)
+        return User.objects.filter(
+            active=True, 
+            teams__team=self.team)
+
+    def get_context_data(self, **kwargs):
+        context = super(MemberList, self).get_context_data(**kwargs)
+        #user_teams = [team_member.team.pk for team_member in self.request.user.member.teams.all()]
+        context['team'] = self.team
+        print 'c', context
+        return context

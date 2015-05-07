@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div class="content">
+    <!-- overflow:scroll; -->
+    <!-- padding:30px 0 0 0; width:70%; height:100%;  display:inline-block; float:left;  -->
+    <div style="width:65%; height:100%;  display:inline-block; float:left;  padding:30px 0 0 30px;  ">
+
+        <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:8px 16px;" >
+            <div class="shape square" style="width:40px; min-width:0; vertical-align:middle; box-shadow:0 0 0; border:1px solid #F2F2F2;">
+                <div>
+                    <img src="{{ team.logo.url }}" style="width:100%; ">
+                </div>
+            </div>
+            <div style="display:inline-block; margin-left:8px; line-height:40px; vertical-align:middle;">
+                <h3> {{ team.name }}</h3>
+            </div>
+            <div style="margin-left:16px; display:inline-block; line-height:40px; font-size:14px; vertical-align:middle;">
+                <a href="{% url 'hierarchy:team' team=team.name %}">
+                    <span style="padding:18px 10px;"><i class="fa fa-fw fa-bookmark"></i></span>
+                </a>
+                <a href="{% url 'hierarchy:team_projects' team=team.name %}">
+                    <span style="padding:18px 10px;"><i class="fa fa-fw fa-mortar-board"></i></span>
+                </a>
+                <a href="{% url 'hierarchy:team_members' team=team.name %}">
+                    <span style="padding:18px 10px;"><i class="fa fa-fw fa-users"></i></span>
+                </a>
+                <a href="{% url 'hierarchy:team_settings' team=team.name %}">
+                    <span style="padding:18px 10px;"><i class="fa fa-fw fa-gear"></i></span>
+                </a>
+            </div>
+<!-- {#
+            <div style="display:inline-block; float:right; line-height:40px; font-size:14px;">
+                <a href="{# url 'workflow:workflow' project=project.name #}">
+                    <span style="padding:18px 10px;"><i class="fa fa-fw fa-plus"></i></span>
+                </a>
+            </div>
+#}
+ -->        </div>
+    
+        {% block section %}
+        {% endblock %}
+    </div>    
+
+    {% block sidebar %}
+    {% endblock %}
+    
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+
+
+</script>
+{% endblock %}
