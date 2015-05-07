@@ -4,7 +4,7 @@ from django.conf.urls import patterns, include, url
 
 from views import WorkflowCreate, WorkflowDetail, WorkflowList
 from views import StageCreate, StageDetail #, StageList
-from views import TaskCreate, TaskDetail, TaskList, task
+from views import TaskCreate, TaskDetail, TaskList, task, check_task
 
 
 urlpatterns = patterns('',
@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     # url(r'^(?P<teamname>\w+)/(?P<project>\w+)/(?P<workflow>\w+)/$', 'workflow.views.default', name='workflow'),
 
     url(r'^project/(?P<project>[\w|-]+)/task/$', task, name='task'), #ajax? PODRIA SER
-    url(r'^project/(?P<project>[\w|-]+)/task/(?P<task>[\w|-]+)/$', TaskDetail.as_view(), name='task'), #ajax? PODRIA SER
+    url(r'^project/(?P<project>[\w|-]+)/task/(?P<task>[\w|-]+)/$', check_task, name='task'), #ajax? PODRIA SER
     
     #NO SE HARA
     url(r'^project/(?P<project>[\w|-]+)/tasks/$', TaskList.as_view(), name='tasks'), #ajax? PODRIA SER

@@ -1,18 +1,22 @@
 # -*- coding:utf-8 -*-
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
-from django.views.generic import ListView
-from django.db.models import Count
+from django.contrib.auth.models import User as auth_user
+from django.views.generic import ListView, CreateView, UpdateView
+from django.db.models import Count, ObjectDoesNotExist
 
 from bernuzz.settings.private import SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
 from management.models import Skill
 from models import User
+from forms import UserForm
 
 from cluster.methods.kmeans import Kmeans
+
+
 
 class LoginRequiredMixin(object):
     @classmethod
@@ -118,6 +122,48 @@ class ExploreList(LoginRequiredMixin, ListView):
 
 
 
+class AccountCreate(LoginRequiredMixin, UpdateView):
+    model = auth_user
+    form_class = UserForm
+    fields = ['first_name', 'last_name', 'username', 'career']
+    template_name = 'basic/user_create.html'
+
+    def get(self, request, *args, **kwargs):
+        try:
+            if request.user.member:
+                return redirect('basic:index')
+        except ObjectDoesNotExist:
+            pass
+
+        return super(AccountCreate, self).get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        self.success_url = reverse('basic:index')
+        print self.success_url
+        response = super(AccountCreate, self).form_valid(form)
+        self.complete(form)
+        return response
+
+    def get_object(self):
+        return self.request.user
+
+    # def form_invalid(self, form, *args, **kwargs):
+    #     print form.errors
+    #     return super(AccountCreate, self).form_invalid(form, *args, **kwargs)
+
+    # def get_form_kwargs(self):
+    #     kwargs = super(AccountCreate, self).get_form_kwargs()
+    #     kwargs.update({'user': self.request.user})
+    #     return kwargs
+
+    # def post(self, request, *args, **kwargs):
+    #     return super(ProjectCreate, self).post(request, *args, **kwargs)
+
+    def complete(self, form):
+        member = User()
+        member.user = self.request.user   
+        member.career = form.cleaned_data.get('career')
+        member.save()
 
 
 

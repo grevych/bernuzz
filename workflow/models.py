@@ -7,6 +7,7 @@ class Process(models.Model):
     name = models.CharField('Process name', max_length=140)
     description = models.CharField('Description', max_length=300)
     parent_id = models.ForeignKey('Process', verbose_name='Parent process', blank=True, null=True)
+    responsible = models.ForeignKey('basic.User', verbose_name='Responsible', related_name='processes')
     active = models.BooleanField('Active', default=True)
 
     class Meta:
@@ -35,9 +36,11 @@ class ProjectProcess(models.Model):
 class Stage(models.Model):
     name = models.CharField('Stage name', max_length=100)
     description = models.CharField('Stage description', max_length=200)
-    responsible = models.IntegerField('Responsible')
+    responsible = models.ForeignKey('basic.User', verbose_name='Responsible', related_name='stages')
     process = models.ForeignKey('Process', verbose_name='Process', related_name='stages')
+    sub = models.ForeignKey('Process', verbose_name='Sub Process', related_name='parent', blank=True, null=True)
     start_time = models.DateTimeField('Start time', auto_now_add=True)
+    due_time = models.DateTimeField('Due time')
     end_time = models.DateTimeField('End date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
     
@@ -52,11 +55,12 @@ class Stage(models.Model):
 
 class Task(models.Model):
     description = models.CharField('Task', max_length=300)
-    responsible = models.IntegerField('Responsible')
+    responsible = models.ForeignKey('basic.User', verbose_name='Responsible', related_name='tasks')
     completed = models.BooleanField('Completed', default=False)
-    completed_by = models.IntegerField('Completed by')
+    completed_by = models.ForeignKey('basic.User', verbose_name='completed By', related_name='completed', blank=True, null=True)
     stage = models.ForeignKey('Stage', verbose_name='Stage', related_name='tasks')
     start_time = models.DateTimeField('Start time', auto_now_add=True)
+    due_time = models.DateTimeField('Due time')
     end_time = models.DateTimeField('End date', blank=True, null=True)
     active = models.BooleanField('Active', default=True)
 

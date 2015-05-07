@@ -1,5 +1,7 @@
 # -*- coding:utf-8 -*-
 
+from datetime import datetime
+
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -214,9 +216,13 @@ class StageCreate(LoginRequiredMixin, CreateView):
         self.process = process_queryset.get().process
         return super(StageCreate, self).post(request, *args, **kwargs)     
 
+    def get_form_kwargs(self):
+        kwargs = super(StageCreate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user, 'project': self.project})
+        return kwargs
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.responsible = 1
         self.success_url = reverse(
             'workflow:workflow', 
             kwargs={
@@ -264,12 +270,16 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 @login_required
 def task(request, project):
     stage_id = request.GET.get('stage', None)
+    manager_id = request.GET.get('manager', None)
+    date = request.GET.get('date', None)
     stage = Stage.objects.get(pk=int(stage_id)) 
+    manager = User.objects.get(pk=int(manager_id))
 
     task = Task()
     task.description = request.GET.get('description', None)
-    task.responsible = 1
-    task.completed_by = 1
+    task.responsible = manager
+    task.completed_by = None
+    task.due_time = datetime.strptime(date, '%Y-%m-%d')
     task.stage = stage
     task.save()
     return HttpResponse('OK')
@@ -281,3 +291,12 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 class TaskList(LoginRequiredMixin, ListView):
     pass
 
+@login_required
+def check_task(request, project, task):
+    task = Task.objects.get(pk=task)
+    task.completed_by = request.user.member
+    task.completed = True
+    task.end_time = datetime.now()
+    task.save()
+
+    return HttpResponse('OK')

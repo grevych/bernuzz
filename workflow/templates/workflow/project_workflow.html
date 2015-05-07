@@ -90,6 +90,22 @@
                     </div>
             </div>
             <div class="form-group">
+                    <ol>
+                    {% for error in form.responsible.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                    <label  class="control-label" for="{{ form.responsible.id_for_label }}" style="width:15%;">Manager</label>
+                    <div style="width:35%; display:inline-block; margin:0 0 0 7.5%;">
+
+                    <select class="form-control" name="{{ form.responsible.html_name }}">
+                        {% for choice in form.responsible.field.choices %}
+                        <option value="{{choice.0}}">{{choice.1}}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+            </div> 
+            <div class="form-group">
                 <button>Create</button>
             </div>
         </form>
