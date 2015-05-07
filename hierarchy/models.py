@@ -32,7 +32,7 @@ class TeamMember(models.Model):
 
 class Role(models.Model):
     name = models.CharField('Role name', max_length=140)
-    team = models.ForeignKey('Team', verbose_name='Team')
+    team = models.ForeignKey('Team', verbose_name='Team', null=True, blank=True)
     active = models.BooleanField('Active', default=True)
 
     class Meta:
