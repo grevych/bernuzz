@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
 
 from django.shortcuts import render
-from .models import Team, Role, TeamMember
+from .models import Team, Role, TeamMember, TeamRole
 from management.models import Project
-from .forms import TeamForm, TeamMemberForm, RoleForm
+from .forms import TeamForm, TeamMemberForm, RoleForm, TeamRoleForm
 from basic.models import User
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView, CreateView, DetailView
@@ -78,38 +78,67 @@ def create_team(request):
 
 
 def update_team(request, team):
-    template = "hierarchy/team_profile.html"
+    template = "hierarchy/team_members.html"
     template_variables = dict()
     team = Team.objects.get(name=team)
     form = TeamForm(instance=team)
     template_variables['title'] = "Update Team"
     template_variables['form'] = form
-    template_variables['url_name'] = "hierarchy:team_profile"
     template_variables['users'] = User.objects.all().filter(active=True)
     template_variables['members'] = TeamMember.objects.all().filter(active=True, team=team)
     template_variables['projects'] = Project.objects.all().filter(active=True, team=team)
     if request.method == 'POST':
         team = Team.objects.get(id=team.id)
         form = TeamForm(request.POST, request.FILES, instance=team)
-        if 'add_member' in request.POST:
-            print request.POST['team_member']
-            user = User.objects.get(user__username=request.POST['team_member'])
-            team_member = TeamMember(user=user, team= team)
-            team_member.save()
-            url = '/team/' + team.name
-            return HttpResponseRedirect(url)
-        elif 'delete':
-            delete(team)
+        if form.is_valid():                
+            form.save()
             return HttpResponseRedirect('/teams/')
         else:
-            if form.is_valid():                
-                form.save()
-                return HttpResponseRedirect('/teams/')
-            else:
-                form_error = form
-                template_variables['form'] = form_error
-                return render(request, template, template_variables)
+            form_error = form
+            template_variables['form'] = form_error
+            return render(request, template, template_variables)
     return render(request, template, template_variables)
+
+def update_team(request, team):
+    template = "hierarchy/team_members.html"
+    url = '/team/' + team + '/members'
+    print url
+    if request.method == 'POST':
+        form = TeamRoleForm(request.POST)
+        if form.is_valid():
+            print form.fields['user']
+            user = User.objects.get(user__username=request.POST['user'])
+            team = Team.objects.get(name=team) 
+            team_member = TeamMember(user=user, team=team)
+            team_member.save()              
+            team_role = form.save(commit=False)
+            team_role.user = user
+            team_role.save()
+        else:
+
+            team_queryset = Team.objects.filter(
+                    active=True, 
+                    name=team,
+                    users__user=User.objects.filter(
+                        user=request.user))
+
+            if not team_queryset.count():
+                raise Http404(_("Team %(name)s not found for this account.")
+                        % {'name': name})
+
+            team = team_queryset.get()
+            members = User.objects.filter(
+                active=True, 
+                teams__team=team)
+            template_variables = {
+                'team': team,
+                'members': members,
+                'form': form
+            }
+
+            return render(request, template,template_variables )
+    return HttpResponseRedirect(url)
+
 
 
 def render_team_members(request):
@@ -124,19 +153,34 @@ def settings(request, team):
     team = Team.objects.get(name=team)
     template_variables['team'] = team
     template_variables['roles'] = Role.objects.all().filter(active=True, team=team)
-    template_variables['form'] = form
+    team_form = TeamForm(instance=team)
+    template_variables['team_form'] = team_form
     if request.method == 'POST':
-        form = RoleForm(request.POST)
-        if form.is_valid():
-            new_form = form.save(commit=False)
-            new_form.team = team
-            new_form.save()
-            url = '/team/' + team.name + '/settings'
-            return HttpResponseRedirect(url)
-        else:
-            form_error = form
-            template_variables['form'] = form_error
-            return render(request, template, template_variables)
+        if 'update' in request.POST:
+            print "TEAM FORM"
+            team = Team.objects.get(name=team)
+            team_form = TeamForm(request.POST, request.FILES, instance=team)
+            if team_form.is_valid():
+                team = team_form.save()
+                url = '/team/' + team.name + '/settings'
+                return HttpResponseRedirect(url)
+            else:
+                form_error = team_form
+                template_variables['team_form'] = form_error
+                return render(request, template, template_variables)
+        elif 'new_role' in request.POST:
+            print "ROLES FORM"          
+            form = RoleForm(request.POST)
+            if form.is_valid():
+                new_form = form.save(commit=False)
+                new_form.team = team
+                new_form.save()
+                url = '/team/' + team.name + '/settings'
+                return HttpResponseRedirect(url)
+            else:
+                form_error = form
+                template_variables['form'] = form_error
+                return render(request, template, template_variables)
     return render(request, template, template_variables)
 
 
@@ -232,6 +276,7 @@ class MemberList(LoginRequiredMixin, ListView):
     context_object_name = 'members'
     template_name = "hierarchy/team_members.html"
     team_name = None
+    model = TeamRole
 
     def get(self, request, *args, **kwargs):
         name = kwargs.get('team', None)
@@ -260,5 +305,10 @@ class MemberList(LoginRequiredMixin, ListView):
         context = super(MemberList, self).get_context_data(**kwargs)
         #user_teams = [team_member.team.pk for team_member in self.request.user.member.teams.all()]
         context['team'] = self.team
+        form = TeamRoleForm()
+        form.fields['role'].queryset = Role.objects.all().filter(team=self.team)
+        context['form'] = form
         print 'c', context
         return context
+
+

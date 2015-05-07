@@ -41,3 +41,15 @@ class Role(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class TeamRole(models.Model):
+    role = models.ForeignKey('Role', verbose_name='Role')
+    user = models.ForeignKey('basic.User', verbose_name='User')
+    active = models.BooleanField('Active', default=True)
+
+    class Meta:
+        permissions = (
+        )
+
+    def __unicode__(self):
+        return '%s is %s' % (self.user.user.username, self.role.name)
