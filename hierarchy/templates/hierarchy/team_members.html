@@ -14,7 +14,9 @@
 </style>
 
 <div style="margin-top:20px; border:1px solid #F2F2F2; border-bottom:1px solid transparent; background:#FFF;">   
-    
+    {% if error %}
+    <div> NO </div>
+    {% endif %}
     <div style="background:#FFF; border:1px solid #F2F2F2; border-radius:4px; padding:28px;" >
         <div style="border-bottom:1px solid #AEAEAE; padding:6px 0">
             <h3> Add Members to Team</h3>
@@ -72,7 +74,11 @@
                 <span> {{ member.user.username }}</span>
             </div>
             <div style="display:inline-block; float:right; line-height:40px;">
-                <span style="padding:18px 10px;"><i class="fa fa-fw fa-times"></i></span>
+                <span style="padding:18px 10px;">
+                    <a href="{% url 'hierarchy:delete_team_members' team=team.name member=member.pk %}">
+                        <i class="fa fa-fw fa-times"></i>
+                    </a>
+                </span>
             </div>
         </div>
     </div>

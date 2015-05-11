@@ -4,7 +4,7 @@ from django.conf.urls import patterns, include, url
 
 from views import WorkflowCreate, WorkflowDetail, WorkflowList
 from views import StageCreate, StageDetail #, StageList
-from views import TaskCreate, TaskDetail, TaskList, task, check_task
+from views import TaskCreate, TaskDetail, TaskList, task, update_task, stage, process
 
 
 urlpatterns = patterns('',
@@ -24,7 +24,12 @@ urlpatterns = patterns('',
     # url(r'^(?P<teamname>\w+)/(?P<project>\w+)/(?P<workflow>\w+)/$', 'workflow.views.default', name='workflow'),
 
     url(r'^project/(?P<project>[\w|-]+)/task/$', task, name='task'), #ajax? PODRIA SER
-    url(r'^project/(?P<project>[\w|-]+)/task/(?P<task>[\w|-]+)/$', check_task, name='task'), #ajax? PODRIA SER
+    url(r'^project/(?P<project>[\w|-]+)/task/(?P<task>[\w|-]+)/$', update_task, name='task'), #ajax? PODRIA SER
+    url(r'^project/(?P<project>[\w|-]+)/stage/(?P<stage>[\w|-]+)/$', stage, name='stage'), #ajax? PODRIA SER
+    url(r'^project/(?P<project>[\w|-]+)/process/(?P<process>[\w|-]+)/$', process, name='process'), #ajax? PODRIA SER
+
+
+
     
     #NO SE HARA
     url(r'^project/(?P<project>[\w|-]+)/tasks/$', TaskList.as_view(), name='tasks'), #ajax? PODRIA SER
@@ -32,7 +37,7 @@ urlpatterns = patterns('',
     url(r'^project/(?P<project>[\w|-]+)/stage/$', StageCreate.as_view(), name='stage'), #ajax? PODRIA SER
     
     #NO SE HARAN
-    url(r'^project/(?P<project>[\w|-]+)/stage/(?P<stage>[\w|-]+)/$', StageDetail.as_view(), name='stage'), #ajax? PODRIA SER
+    ##url(r'^project/(?P<project>[\w|-]+)/stage/(?P<stage>[\w|-]+)/$', StageDetail.as_view(), name='stage'), #ajax? PODRIA SER
     
     #url(r'^project/(?P<project>[\w|-]+)/stages/$', StageList.as_view(), name='stages'), #ajax? PODRIA SER
     

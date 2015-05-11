@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^teams/$', render_teams, name='teams'),
     url(r'^team/(?P<team>[\w|-]+)/settings/$', 'hierarchy.views.settings', name='team_settings'), 
     url(r'^team/(?P<team>[\w|-]+)/members/$', MemberList.as_view(), name='team_members'), 
+    url(r'^team/(?P<team>[\w|-]+)/members/(?P<member>[\d]+)/$','hierarchy.views.delete_member', name='delete_team_members'), 
     url(r'^team/(?P<team>[\w|-]+)/members/add/$', 'hierarchy.views.update_team', name='add_team_members'), 
     url(r'^team/(?P<team>[\w|-]+)/projects/$', ProjectList.as_view(), name='team_projects'), 
 

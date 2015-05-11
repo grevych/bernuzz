@@ -99,10 +99,26 @@
                     <img  src="{% static 'img/user.jpg' %}"  style=" position:relative; width:100%;  ">
                 </div> 
             </div>
-            <div style="display:inline-block; vertical-align:top; width:75%;">
+            <div style="display:inline-block; vertical-align:top; width:55%;">
                 <div class="manager-name-preview" style="font-family:Open Sans; font-size:14px; font-weight:400; color:#434343;"></div>
                 <div class="manager-username-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343;"></div>
             </div>
+            <div class="process-edit-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; display:inline-block; vertical-align:top; width:0%;">
+                <a>
+                    <button style="border-radius:4px; padding:8px 14px; background:#343434; color:#FFF;">Edit</button>
+                </a>
+            </div>
+            <select class="manager" name="manager" style="display:none;">
+                {% if project.team %}
+                    {% for user in project.team.users.all %}
+                    <option value="{{user.user.user.username}}">{{user.user.user.username}}</option>
+                    {% endfor%}
+                {% else %}
+                    {% for user in project.users.all %}
+                    <option value="{{user.user.user.username}}">{{user.user.user.username}}</option>
+                    {% endfor%}
+                {% endif %}
+            </select>
         </div>
 
         <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
@@ -116,6 +132,13 @@
             <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">
                 <a class="stage-link-preview" href="{% url 'workflow:workflow' project=project.name %}">
                     <button style="border-radius:4px; padding:8px 14px; background:#343434; color:#FFF;">Add stage</button>
+                </a>
+            </div>
+        </div>
+        <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+            <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">
+                <a class="process-delete-preview">
+                    <button style="border-radius:4px; padding:8px 14px; background:#AE2323; color:#FFF;">Delete</button>
                 </a>
             </div>
         </div>
@@ -138,10 +161,26 @@
                     <img  src="{% static 'img/user.jpg' %}"  style=" position:relative; width:100%;  ">
                 </div> 
             </div>
-            <div style="display:inline-block; vertical-align:top; width:75%;">
+            <div style="display:inline-block; vertical-align:top; width:55%;">
                 <div class="manager-name-preview" style="font-family:Open Sans; font-size:14px; font-weight:400; color:#434343;"></div>
                 <div class="manager-username-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343;"></div>
             </div>
+            <div class="stage-edit-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; display:inline-block; vertical-align:top; width:0%;">
+                <a>
+                    <button style="border-radius:4px; padding:8px 14px; background:#343434; color:#FFF;">Edit</button>
+                </a>
+            </div>
+            <select class="manager" name="manager" style="display:none;">
+                {% if project.team %}
+                    {% for user in project.team.users.all %}
+                    <option value="{{user.user.user.username}}">{{user.user.user.username}}</option>
+                    {% endfor%}
+                {% else %}
+                    {% for user in project.users.all %}
+                    <option value="{{user.user.user.username}}">{{user.user.user.username}}</option>
+                    {% endfor%}
+                {% endif %}
+            </select>
         </div>
 
         <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
@@ -161,8 +200,19 @@
                         {% for user in project.team.users.all %}
                         <option value="{{user.user.pk}}">{{user.user.user.username}}</option>
                         {% endfor%}
+                    {% else %}
+                        {% for user in project.users.all %}
+                            <option value="{{user.user.pk}}">{{user.user.user.username}}</option>
+                        {% endfor%}
                     {% endif %}
                 </select>
+            </div>
+        </div>
+        <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+            <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">
+                <a class="stage-delete-preview" >
+                    <button style="border-radius:4px; padding:8px 14px; background:#AE2323; color:#FFF;">Delete</button>
+                </a>
             </div>
         </div>
     </div>
@@ -180,10 +230,26 @@
                     <img  src="{% static 'img/user.jpg' %}"  style=" position:relative; width:100%;  ">
                 </div> 
             </div>
-            <div style="display:inline-block; vertical-align:top; width:75%;">
+            <div style="display:inline-block; vertical-align:top; width:55%;">
                 <div class="manager-name-preview" style="font-family:Open Sans; font-size:14px; font-weight:400; color:#434343;"></div>
                 <div class="manager-username-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343;"></div>
             </div>
+            <div class="task-edit-preview" style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; display:inline-block; vertical-align:top; width:0%;">
+                <a >
+                    <button style="border-radius:4px; padding:8px 14px; background:#343434; color:#FFF;">Edit</button>
+                </a>
+            </div>
+            <select class="manager" name="manager" style="display:none;">
+                {% if project.team %}
+                    {% for user in project.team.users.all %}
+                    <option value="{{user.user.user.username}}">{{user.user.user.username}}</option>
+                    {% endfor%}
+                {% else %}
+                    {% for user in project.users.all %}
+                    <option value="{{user.user.user.username}}">{{user.user.user.username}}</option>
+                    {% endfor%}
+                {% endif %}
+            </select>
         </div>
 
         <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
@@ -209,6 +275,14 @@
         <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
             <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">
                 <button class="complete-task" type="button" style="border-radius:4px; padding:8px 14px; background:#343434; color:#FFF;">Check</button>
+            </div>
+        </div>
+
+        <div style="padding:12px 24px; border-top:1px solid #F2F2F2;">
+            <div style="font-family:Open Sans; font-size:14px; font-weight:300; color:#434343; ">
+                <a class="task-delete-preview" >
+                    <button style="border-radius:4px; padding:8px 14px; background:#AE2323; color:#FFF;">Delete</button>
+                </a>
             </div>
         </div>
     </div>
@@ -256,18 +330,26 @@
     }
 
     function updateTask(event) {
-        if(event.which === 13 &&  $(this).val().trim()){
-            var task = event.data.stage.tasks[event.data.task].id;
+        var task = event.data;
+        $(this).hide();
+        $(this).next('.manager').val(task.manager.username);
+        $(this).next('.manager').show();
+        $(this).next('.manager').unbind();
+        $(this).next('.manager').on('change', event.data, function() {
+            var 
+                task = event.data.pk,
+                manager = $(this).val();
             $.ajax({
-                method: 'post',
+                method: 'GET',
                 url:  "{% url 'workflow:task' project=project.name %}" + task,
-                data: event.data.stage,
+                data: {
+                    manager: manager
+                },
                 success: function() {
-
+                    location.reload();
                 }
             });
-        }
-
+        });
     }
 
     function checkTask(event) {
@@ -275,9 +357,102 @@
         $.ajax({
             method: 'GET',
             url:  "{% url 'workflow:task' project=project.name %}" + task,
+            data: {
+                check:true
+            },
             success: function() {
                 location.reload();
             }
+        });
+    }
+
+    function deleteTask(event) {
+        var task = event.data.pk;
+        $.ajax({
+            method: 'GET',
+            url:  "{% url 'workflow:task' project=project.name %}" + task,
+            data: {
+                delete:true
+            },
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+
+    function deleteProcess(event) {
+        var process = event.data.pk;
+
+        $.ajax({
+            method: 'GET',
+            url: "/project/{{project.name}}/process/" + process,
+            data: {
+                delete: true
+            },
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+
+    function updateProcess(event) {
+        var process = event.data;
+        $(this).hide();
+        $(this).next('.manager').val(process.manager.username);
+        $(this).next('.manager').show();
+        $(this).next('.manager').unbind();
+        $(this).next('.manager').on('change', event.data, function() {
+            var 
+                process = event.data.pk,
+                manager = $(this).val();
+            $.ajax({
+                method: 'GET',
+                url:  "/project/{{project.name}}/process/" + process,
+                data: {
+                    manager: manager
+                },
+                success: function() {
+                    location.reload();
+                }
+            });
+        });
+    }
+
+    function deleteStage(event) {
+        var stage = event.data.pk;
+
+        $.ajax({
+            method: 'GET',
+            url: "{% url 'workflow:stage' project=project.name %}" + stage,
+            data: {
+                delete: true
+            },
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+
+    function updateStage(event) {
+        var stage = event.data;
+        $(this).hide();
+        $(this).next('.manager').val(stage.manager.username);
+        $(this).next('.manager').show();
+        $(this).next('.manager').unbind();
+        $(this).next('.manager').on('change', event.data, function() {
+            var 
+                stage = event.data.pk,
+                manager = $(this).val();
+            $.ajax({
+                method: 'GET',
+                url:  "{% url 'workflow:stage' project=project.name %}" + stage,
+                data: {
+                    manager: manager
+                },
+                success: function() {
+                    location.reload();
+                }
+            });
         });
     }
 
@@ -306,8 +481,11 @@
         $('.parent-preview').text('Extends: #' + process.parent.pk + process.parent.name);
         $('.stage-link-preview').attr('href', $('.stage-link-preview').attr('href') + process.pk);
         // $('.task.clone').remove();
-        // $('.task.base').unbind();
-         
+        $('.process-delete-preview').unbind();
+        $('.process-delete-preview').on('click', process, deleteProcess);
+
+        $('.process-edit-preview').unbind();
+        $('.process-edit-preview').on('click', process, updateProcess);
     });
 
     $('.stage > .main').on('click', function() {
@@ -328,7 +506,7 @@
         $('.description-preview').text(stage.description);
         $('.manager-name-preview').text(stage.manager.name);
         $('.manager-username-preview').text(stage.manager.username);
-        $('.tasks-preview').text('# Tasks: ' + stage.tasks.length);
+        $('.tasks-preview').text('# Tasks: ' + (stage.tasks.length - 1));
         $('.subprocess-preview').text('Subprocess: #' + stage.subprocess.pk + stage.subprocess.name);
 
         $('.task-description').unbind();
@@ -356,6 +534,11 @@
         //     task.addClass('clone');
         //     $('.tasks').append(task);
         // });
+        $('.stage-delete-preview').unbind();
+        $('.stage-delete-preview').on('click', stage, deleteStage);
+
+        $('.stage-edit-preview').unbind();
+        $('.stage-edit-preview').on('click', stage, updateStage);
 
     });
 
@@ -384,8 +567,11 @@
         $('.complete-task').unbind();
         $('.complete-task').on('click', task, checkTask);
         
-        // $('.task-description').unbind();
-        // $('.task-description').on('keydown', stage, addTask);
+        $('.task-delete-preview').unbind();
+        $('.task-delete-preview').on('click', task, deleteTask);
+
+        $('.task-edit-preview').unbind();
+        $('.task-edit-preview').on('click', task, updateTask);
 
 
     });

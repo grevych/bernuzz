@@ -8,10 +8,22 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('basic', '0001_initial'),
-        ('hierarchy', '0001_initial'),
+        ('hierarchy', '__first__'),
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='AccessLevel',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=100, verbose_name=b'Access Level')),
+                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
+            ],
+            options={
+                'permissions': (),
+            },
+            bases=(models.Model,),
+        ),
         migrations.CreateModel(
             name='Announcement',
             fields=[
@@ -57,27 +69,16 @@ class Migration(migrations.Migration):
             name='Project',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(unique=True, max_length=200, verbose_name=b'Project name')),
+                ('name', models.CharField(max_length=200, verbose_name=b'Project name')),
                 ('description', models.CharField(max_length=600, verbose_name=b'Project description', blank=True)),
                 ('area', models.CharField(max_length=200, verbose_name=b'Area')),
-                ('logo', models.CharField(max_length=140, verbose_name=b'Project logo', blank=True)),
+                ('logo', models.FileField(null=True, upload_to=b'projects/images/', blank=True)),
                 ('start_date', models.DateField(auto_now_add=True, verbose_name=b'Start date')),
                 ('end_date', models.DateField(null=True, verbose_name=b'Start date', blank=True)),
                 ('active', models.BooleanField(default=True, verbose_name=b'Active')),
+                ('access_level', models.ForeignKey(verbose_name=b'Access Level', blank=True, to='management.AccessLevel', null=True)),
                 ('parent_id', models.ForeignKey(verbose_name=b'Parent project', blank=True, to='management.Project', null=True)),
-                ('team', models.ForeignKey(verbose_name=b'Team', blank=True, to='hierarchy.Team', null=True)),
-            ],
-            options={
-                'permissions': (),
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='ProjectPrivacy',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=100, verbose_name=b'Project Privacy')),
-                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
+                ('team', models.ForeignKey(related_name='projects', verbose_name=b'Team', blank=True, to='hierarchy.Team', null=True)),
             ],
             options={
                 'permissions': (),
@@ -90,7 +91,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('date', models.DateField(auto_now_add=True, verbose_name=b'Added on')),
                 ('active', models.BooleanField(default=True, verbose_name=b'Active')),
-                ('project', models.ForeignKey(verbose_name=b'Project', to='management.Project')),
+                ('project', models.ForeignKey(related_name='skills', verbose_name=b'Project', to='management.Project')),
             ],
             options={
                 'permissions': (),
@@ -138,7 +139,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='projectskill',
             name='skill',
-            field=models.ForeignKey(verbose_name=b'Skill', to='management.Skill'),
+            field=models.ForeignKey(related_name='projects', verbose_name=b'Skill', to='management.Skill'),
             preserve_default=True,
         ),
         migrations.AddField(

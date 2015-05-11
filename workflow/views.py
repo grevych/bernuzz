@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, DetailView
@@ -255,6 +255,8 @@ class StageCreate(LoginRequiredMixin, CreateView):
 
     def complete(self):
         self.object.process = self.process
+        import datetime
+        self.object.due_time = datetime.datetime.now() 
         self.object.save()
 
 
@@ -292,11 +294,84 @@ class TaskList(LoginRequiredMixin, ListView):
     pass
 
 @login_required
-def check_task(request, project, task):
+def update_task(request, project, task):
+    delete = request.GET.get('delete', None)
     task = Task.objects.get(pk=task)
-    task.completed_by = request.user.member
-    task.completed = True
-    task.end_time = datetime.now()
+
+    if task.completed:
+        return HttpResponseForbidden()
+
+    if delete:
+        task.delete()
+        return HttpResponse('OK')
+
+    check = request.GET.get('check', None)
+
+    if check:
+        task.completed_by = request.user.member
+        task.completed = True
+        task.end_time = datetime.now()
+        task.save()
+        return HttpResponse('OK')
+
+    manager_id = request.GET.get('manager', None)
+    #description = request.GET.get('description', None)
+    #date = request.GET.get('date', None)
+    manager = User.objects.get(user__username=manager_id)
+
+    #task.description = description
+    task.responsible = manager
+    #task.due_time = datetime.strptime(date, '%Y-%m-%d')
     task.save()
+
+    return HttpResponse('OK')
+
+
+@login_required
+def process(request, project, process):
+    delete = request.GET.get('delete', None)
+    process = Process.objects.get(pk=process)
+
+    if delete:
+        if process.stages.filter(tasks__completed=True).count():
+            return HttpResponseForbidden()
+        process.delete()
+        return HttpResponse('OK')
+
+    manager_id = request.GET.get('manager', None)
+    #name = request.GET.get('name', None)
+    #description = request.GET.get('description', None)
+    manager = User.objects.get(user__username=manager_id)
+
+    #process.name = name
+    #process.description = description
+    process.responsible = manager
+    process.save()
+
+    return HttpResponse('OK')
+
+
+@login_required
+def stage(request, project, stage):
+    delete = request.GET.get('delete', None)
+    stage = Stage.objects.get(pk=stage)
+
+    if delete:
+        if stage.tasks.filter(completed=True).count():
+            return HttpResponseForbidden()
+        stage.delete()
+        return HttpResponse('OK')
+
+    manager_id = request.GET.get('manager', None)
+    #name = request.GET.get('name', None)
+    #description = request.GET.get('description', None)
+    manager = User.objects.get(user__username=manager_id)
+
+    #stage.name = name
+    #stage.description = description
+    stage.responsible = manager
+    #import datetime
+    #stage.due_time = datetime.datetime.now() 
+    stage.save()
 
     return HttpResponse('OK')

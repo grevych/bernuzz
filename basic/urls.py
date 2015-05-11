@@ -13,6 +13,6 @@ urlpatterns = patterns('',
     #url(r'^(?P<account>[\w|-]+)/settings/$', 'management.views.default', name='account_settings'),
 
     url(r'^welcome/$', AccountCreate.as_view(), name='account'),
-    url(r'^explore/$', ExploreList.as_view(), name='settings'),
+    url(r'^explore/$', ExploreList.as_view(), name='explore'),
 
 )

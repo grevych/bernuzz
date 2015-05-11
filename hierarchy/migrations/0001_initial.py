@@ -49,10 +49,23 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.CreateModel(
+            name='TeamRole',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('active', models.BooleanField(default=True, verbose_name=b'Active')),
+                ('role', models.ForeignKey(verbose_name=b'Role', to='hierarchy.Role')),
+                ('user', models.ForeignKey(verbose_name=b'User', to='basic.User')),
+            ],
+            options={
+                'permissions': (),
+            },
+            bases=(models.Model,),
+        ),
         migrations.AddField(
             model_name='role',
             name='team',
-            field=models.ForeignKey(verbose_name=b'Team', to='hierarchy.Team'),
+            field=models.ForeignKey(verbose_name=b'Team', blank=True, to='hierarchy.Team', null=True),
             preserve_default=True,
         ),
     ]

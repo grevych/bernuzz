@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load menu %}
 <!-- background:rgba(158, 199, 231, 0.46); -->
 <aside class="main" style="">                 
     
@@ -15,7 +16,8 @@
                     <div class="item">
                         <i class="fa fa-mortar-board fa-fw"></i>
                         <!-- <span>Projects</span> -->
-                        <div class="index visible"></div>
+                        
+                        <div class="index {% active_item request 'management:projects' %}"></div>
                     </div>
                 </a>
 
@@ -24,7 +26,7 @@
                 <a href="{% url 'hierarchy:teams' %}">
                     <div class="item">
                         <i class="fa fa-group fa-fw"></i>
-                        <div class="index"></div>
+                        <div class="index  {% active_item request 'hierarchy:teams' %}"></div>
                     </div>
                 </a>
             </li>
@@ -32,7 +34,7 @@
                 <a href="{% url 'workflow:tasks' %}">
                     <div class="item">
                         <i class="fa fa-tasks fa-fw"></i>
-                        <div class="index"></div>
+                        <div class="index  {% active_item request 'workflow:tasks' %}"></div>
                     </div>
                 </a>
             </li>
@@ -40,7 +42,7 @@
                 <a href="/explore{# url 'explore:index' #}">
                     <div class="item">
                         <i class="fa fa-globe fa-fw"></i>
-                        <div class="index"></div>
+                        <div class="index  {% active_item request 'basic:explore' %}"></div>
                     </div>
                 </a>
             </li>
@@ -48,7 +50,7 @@
                 <a href="{% url 'basic:settings' %}">
                     <div class="item">
                         <i class="fa fa-gears fa-fw"></i>
-                        <div class="index"></div>
+                        <div class="index  {% active_item request 'basic:settings' %}"></div>
                     </div>
                 </a>
             </li>

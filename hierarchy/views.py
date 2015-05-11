@@ -1,11 +1,13 @@
 # -*- coding:utf-8 -*-
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 from .models import Team, Role, TeamMember, TeamRole
 from management.models import Project
 from .forms import TeamForm, TeamMemberForm, RoleForm, TeamRoleForm
 from basic.models import User
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from workflow.models import Task
+from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django.views.generic import ListView, CreateView, DetailView
 from django.utils.translation import ugettext as _
 
@@ -28,7 +30,7 @@ def delete(model):
 def render_teams(request):
     template = "management/teams.html"
     template_variables = dict()
-    teams = TeamMember.objects.all().filter(active=True, user=request.user)
+    teams = TeamMember.objects.all().filter(active=True, user=request.user.member)
     teams_membership = TeamMember.objects.all().filter(active=True, team = teams)
     print teams_membership
     template_variables['group'] = teams
@@ -61,7 +63,7 @@ def create_team(request):
     template_variables['form'] = form
     template_variables['user'] = request.user
     template_variables['url_name'] = "hierarchy:team"
-    user = User.objects.get(pk=request.user.id)
+    user = User.objects.get(pk=request.user.member.pk)
     if request.method == 'POST':
         form = TeamForm(request.POST, request.FILES)
         if form.is_valid():                
@@ -280,6 +282,7 @@ class MemberList(LoginRequiredMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         name = kwargs.get('team', None)
+        self.error = kwargs.get('error', None)
         team_queryset = Team.objects.filter(
                 active=True, 
                 name=name,
@@ -308,7 +311,24 @@ class MemberList(LoginRequiredMixin, ListView):
         form = TeamRoleForm()
         form.fields['role'].queryset = Role.objects.all().filter(team=self.team)
         context['form'] = form
+        context['error'] = self.error
         print 'c', context
         return context
+
+
+
+def delete_member(request, team, member):
+    user = User.objects.get(pk=int(member))
+    task_queryset = Task.objects.filter(stage__process__projects__project__team=Team.objects.get(name=team), responsible=user, completed=False)
+    print task_queryset
+    if task_queryset.count():
+        return MemberList.as_view()(request, team=team, error=True)
+
+    team_member = TeamMember.objects.get(user=user, team__name=team)
+    team_member.delete()
+
+    return redirect(reverse('hierarchy:team_members', kwargs={'team':team}))
+
+
 
 
